@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://manageflow.ae/sitemap.xml

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>ManageFlow — Websites, Branding & Campaigns for UAE Businesses</title>
 <meta name="description" content="ManageFlow is an Emirati-founded digital studio in Abu Dhabi. We build websites, brand identities, and social media campaigns for UAE businesses — cafés, clinics, salons, and more." />
 <meta name="keywords" content="website design UAE, brand identity Abu Dhabi, social media management UAE, digital studio Abu Dhabi, branding for cafes UAE, clinic branding UAE, salon branding UAE" />
@@ -18,8 +18,41 @@
 <meta property="og:locale:alternate" content="ar_AE" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content="ManageFlow — Premium Digital Brand Studio | UAE" />
-<meta name="twitter:description" content="A UAE-based brand studio for ambitious modern brands." />
+<meta name="twitter:description" content="Websites, branding & social media for UAE businesses. Emirati-founded studio in Abu Dhabi — cafés, clinics, salons, and more." />
 <meta name="theme-color" content="#0A1A2F" />
+<link rel="icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "ManageFlow",
+  "description": "Emirati-founded digital studio in Abu Dhabi offering website design, brand identity, social media management, and promotional campaigns for UAE businesses.",
+  "url": "https://manageflow.ae",
+  "telephone": "+971568115344",
+  "email": "hello@manageflow.ae",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Abu Dhabi",
+    "addressCountry": "AE"
+  },
+  "areaServed": {
+    "@type": "Country",
+    "name": "United Arab Emirates"
+  },
+  "serviceType": ["Website Design", "Brand Identity", "Social Media Management", "Promotional Campaigns", "Google & Search Presence"],
+  "foundingLocation": {
+    "@type": "Place",
+    "name": "Abu Dhabi, UAE"
+  },
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+971568115344",
+    "contactType": "customer service",
+    "availableLanguage": ["English", "Arabic"]
+  }
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -171,7 +204,7 @@ body[dir="rtl"] .principle-card p, body[dir="rtl"] .service-card p{ line-height:
   transform:translate(-50%,-50%);
   transition:opacity .6s var(--ease);
   opacity:0;
-  mix-blend-mode:plus-lighter;
+  mix-blend-mode:screen;
   z-index:1;
 }
 .hero-bg:hover .cursor-light{ opacity:1; }
@@ -917,6 +950,115 @@ body[dir="rtl"] .footer-link:hover{ transform:translateX(-4px); }
 ::-webkit-scrollbar-track{ background:#F8F5EF; }
 ::-webkit-scrollbar-thumb{ background:rgba(10,26,47,.18); border-radius:10px; }
 ::-webkit-scrollbar-thumb:hover{ background:rgba(10,26,47,.32); }
+
+/* ===== MOBILE / SAFARI / PERFORMANCE FIXES ===== */
+
+/* Minimum 48px touch targets on interactive elements */
+.btn{ min-height:48px; }
+.wa-float{ min-width:54px; min-height:54px; }
+.nav-link{ min-height:44px; display:inline-flex; align-items:center; }
+.mobile-link{ min-height:52px; display:flex; align-items:center; }
+button, [role="button"]{ min-height:44px; }
+
+/* Safe area insets for iPhone notch / home indicator */
+.wa-float{
+  bottom:calc(28px + env(safe-area-inset-bottom));
+  right:calc(28px + env(safe-area-inset-right));
+}
+body[dir="rtl"] .wa-float{
+  right:auto;
+  left:calc(28px + env(safe-area-inset-left));
+}
+.toast{
+  bottom:calc(32px + env(safe-area-inset-bottom));
+}
+header#nav{
+  padding-top:env(safe-area-inset-top);
+}
+
+/* Scroll-margin-top so anchors clear the fixed nav */
+#services, #work, #process, #contact, #studio, #about, #top{
+  scroll-margin-top:80px;
+}
+
+/* iOS form input — prevent auto-zoom and appearance */
+.form-input,
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="url"],
+textarea,
+select{
+  -webkit-appearance:none;
+  appearance:none;
+  font-size:16px; /* prevents iOS auto-zoom below 16px */
+}
+@media (min-width:768px){
+  .form-input{ font-size:15px; }
+}
+
+/* Optimize backdrop-filter on mobile — lighter blur reduces battery/jank */
+@media (max-width:768px){
+  .glass{
+    backdrop-filter:blur(12px) saturate(120%);
+    -webkit-backdrop-filter:blur(12px) saturate(120%);
+  }
+  .glass-dark{
+    backdrop-filter:blur(12px) saturate(120%);
+    -webkit-backdrop-filter:blur(12px) saturate(120%);
+  }
+  .nav-blur{
+    backdrop-filter:blur(16px) saturate(140%);
+    -webkit-backdrop-filter:blur(16px) saturate(140%);
+  }
+  .mobile-menu{
+    backdrop-filter:blur(20px) saturate(140%);
+    -webkit-backdrop-filter:blur(20px) saturate(140%);
+  }
+  /* Safe area for mobile WhatsApp button */
+  .wa-float{ bottom:calc(20px + env(safe-area-inset-bottom)); right:calc(20px + env(safe-area-inset-right)); }
+  body[dir="rtl"] .wa-float{ left:calc(20px + env(safe-area-inset-left)); right:auto; }
+}
+
+/* Hide hero visual column on very small screens — keeps hero text clean */
+@media (max-width:639px){
+  .hero-visual-col{ display:none; }
+}
+
+/* Touch-only devices: disable hover-dependent animations & expensive effects */
+@media (hover:none) and (pointer:coarse){
+  /* Stop continuous floating card animations (battery drain) */
+  .float-1, .float-2, .float-3{ animation:none; }
+  /* Stop aurora drift */
+  .hero-bg::before{ animation:none; }
+  /* Stop spin slow (founder card) */
+  .initial-circle::after{ animation:none !important; }
+  /* Disable cursor-light (no cursor on touch) */
+  .cursor-light{ display:none; }
+  /* Tone down service card hover (touch devices don't hover) */
+  .service-card:hover{
+    transform:none;
+    box-shadow:none;
+    border-color:rgba(10,26,47,.06);
+  }
+  /* Disable magnetic effect side-effects (JS handles this too) */
+  .magnetic{ will-change:auto; }
+  /* Keep pulse on WhatsApp — it's a valuable CTA signal */
+}
+
+/* Reduced-motion accessibility — honour OS-level preference */
+@media (prefers-reduced-motion:reduce){
+  *, *::before, *::after{
+    animation-duration:0.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.01ms !important;
+  }
+  html{ scroll-behavior:auto; }
+  .rotator-word{
+    transition:opacity .3s ease, filter .3s ease !important;
+  }
+}
+/* ===== END MOBILE / SAFARI / PERFORMANCE FIXES ===== */
 </style>
 </head>
 <body>
@@ -997,7 +1139,7 @@ body[dir="rtl"] .footer-link:hover{ transform:translateX(-4px); }
       </div>
 
       <!-- Hero Visual -->
-      <div class="lg:col-span-5 relative h-[480px] lg:h-[560px] reveal">
+      <div class="hero-visual-col lg:col-span-5 relative h-[480px] lg:h-[560px] reveal">
         <!-- Main dashboard card -->
         <div class="absolute right-0 top-6 w-[88%] glass rounded-3xl p-6 shadow-[0_30px_80px_-30px_rgba(10,26,47,0.35)] float-1">
           <div class="flex items-center justify-between mb-5">
@@ -1620,6 +1762,16 @@ body[dir="rtl"] .footer-link:hover{ transform:translateX(-4px); }
             </div>
             <i data-lucide="arrow-up-right" class="w-4 h-4 text-navy/40 rtl-flip"></i>
           </a>
+          <a href="tel:+9715681115344" class="stat-card flex items-center gap-4 group">
+            <div class="w-12 h-12 rounded-xl bg-gold/15 flex items-center justify-center flex-shrink-0 group-hover:bg-gold/25 transition-colors">
+              <i data-lucide="phone" class="w-5 h-5 text-gold"></i>
+            </div>
+            <div class="flex-1">
+              <div class="text-[11px] uppercase tracking-wider text-navy/50 font-medium" data-en="Phone" data-ar="هاتف">Phone</div>
+              <div class="text-navy font-medium">+971 56 811 5344</div>
+            </div>
+            <i data-lucide="phone-call" class="w-4 h-4 text-navy/40"></i>
+          </a>
           <a href="mailto:hello@manageflow.ae" class="stat-card flex items-center gap-4 group">
             <div class="w-12 h-12 rounded-xl bg-gold/15 flex items-center justify-center flex-shrink-0 group-hover:bg-gold/25 transition-colors">
               <i data-lucide="mail" class="w-5 h-5 text-gold"></i>
@@ -1647,12 +1799,12 @@ body[dir="rtl"] .footer-link:hover{ transform:translateX(-4px); }
         <form id="contactForm" class="glass rounded-3xl p-8 lg:p-10 space-y-5" novalidate>
           <div>
             <label class="block text-[12px] uppercase tracking-wider text-navy/60 font-medium mb-2" data-en="Full Name" data-ar="الاسم الكامل">Full Name</label>
-            <input type="text" id="f-name" class="form-input" placeholder="Khaled Al Mansoori" required />
+            <input type="text" id="f-name" class="form-input" placeholder="Khaled Al Mansoori" required autocomplete="name" />
             <div class="error-msg" data-error-for="f-name" data-en="Please enter your name." data-ar="من فضلك، أدخل اسمك.">Please enter your name.</div>
           </div>
           <div>
             <label class="block text-[12px] uppercase tracking-wider text-navy/60 font-medium mb-2" data-en="Email" data-ar="البريد الإلكتروني">Email</label>
-            <input type="email" id="f-email" class="form-input" placeholder="you@yourbrand.com" required />
+            <input type="email" id="f-email" class="form-input" placeholder="you@yourbrand.com" required autocomplete="email" />
             <div class="error-msg" data-error-for="f-email" data-en="Please enter a valid email." data-ar="من فضلك، أدخل بريداً إلكترونياً صحيحاً.">Please enter a valid email.</div>
           </div>
           <div>
@@ -1738,6 +1890,7 @@ body[dir="rtl"] .footer-link:hover{ transform:translateX(-4px); }
       </div>
       <div class="text-warm/65 tracking-wide" data-en="Emirati Digital Studio · Abu Dhabi, UAE" data-ar="استوديو رقمي إماراتي · أبوظبي، الإمارات">Emirati Digital Studio · Abu Dhabi, UAE</div>
     </div>
+    <p class="mt-5 text-center text-[10px] text-warm/28 leading-relaxed max-w-xl mx-auto" data-en="This website does not collect personal data without your consent. Contact information submitted via the form is used solely to respond to your enquiry." data-ar="لا يجمع هذا الموقع بياناتك الشخصية دون موافقتك. تُستخدم المعلومات المُدخلة في النموذج فقط للردّ على استفسارك.">This website does not collect personal data without your consent. Contact information submitted via the form is used solely to respond to your enquiry.</p>
   </div>
 </footer>
 
@@ -1789,10 +1942,10 @@ body[dir="rtl"] .footer-link:hover{ transform:translateX(-4px); }
     setInterval(advance, 3200);
   }
 
-  // ========== Hero cursor-aware ambient light ==========
+  // ========== Hero cursor-aware ambient light (pointer devices only) ==========
   const heroSection = document.querySelector('.hero-bg');
   const heroLight = document.getElementById('heroCursorLight');
-  if (heroSection && heroLight) {
+  if (heroSection && heroLight && !isTouchDevice) {
     let raf = null;
     heroSection.addEventListener('mousemove', (e) => {
       const rect = heroSection.getBoundingClientRect();
@@ -1866,15 +2019,26 @@ body[dir="rtl"] .footer-link:hover{ transform:translateX(-4px); }
   document.getElementById('langToggle').addEventListener('click', () => applyLang(currentLang === 'en' ? 'ar' : 'en'));
   document.getElementById('mobileLang').addEventListener('click', () => applyLang(currentLang === 'en' ? 'ar' : 'en'));
 
-  // ========== Magnetic buttons ==========
-  document.querySelectorAll('.magnetic').forEach(btn => {
-    btn.addEventListener('mousemove', (e) => {
-      const rect = btn.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      btn.style.transform = `translate(${x * 0.18}px, ${y * 0.25}px)`;
+  // ========== Magnetic buttons (desktop / pointer devices only) ==========
+  const isTouchDevice = window.matchMedia('(hover:none) and (pointer:coarse)').matches;
+  if (!isTouchDevice) {
+    document.querySelectorAll('.magnetic').forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left - rect.width / 2;
+        const y = e.clientY - rect.top - rect.height / 2;
+        btn.style.transform = `translate(${x * 0.18}px, ${y * 0.25}px)`;
+      });
+      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
     });
-    btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+  }
+
+  // ========== Pause CSS animations when tab is hidden (Page Visibility API) ==========
+  document.addEventListener('visibilitychange', () => {
+    document.body.style.animationPlayState = document.hidden ? 'paused' : '';
+    document.querySelectorAll('.float-1, .float-2, .float-3, .wa-float::before').forEach(el => {
+      el.style.animationPlayState = document.hidden ? 'paused' : '';
+    });
   });
 
   // ========== Smooth scroll (anchor offset) ==========
