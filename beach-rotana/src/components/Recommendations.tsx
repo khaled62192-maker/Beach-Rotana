@@ -11,6 +11,8 @@ interface RecommendationsProps {
   venues: Venue[];
   onSelect: (venue: Venue) => void;
   onChangeMood: () => void;
+  onViewAll: () => void;
+  onSurpriseAgain?: () => void;
 }
 
 export default function Recommendations({
@@ -19,6 +21,8 @@ export default function Recommendations({
   venues,
   onSelect,
   onChangeMood,
+  onViewAll,
+  onSurpriseAgain,
 }: RecommendationsProps) {
   return (
     <div
@@ -57,6 +61,7 @@ export default function Recommendations({
             const name = lang === 'ar' ? venue.nameAr : venue.nameEn;
             const cuisine = lang === 'ar' ? venue.cuisineAr : venue.cuisine;
             const keyFeature = lang === 'ar' ? venue.keyFeatureAr : venue.keyFeature;
+            const description = lang === 'ar' ? venue.descriptionAr : venue.description;
 
             return (
               <motion.button
@@ -71,6 +76,7 @@ export default function Recommendations({
                 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => onSelect(venue)}
+                aria-label={`${name} — ${cuisine}. ${keyFeature}`}
                 className="
                   rounded-2xl overflow-hidden
                   bg-rotana-navy
@@ -83,7 +89,7 @@ export default function Recommendations({
                 <div className="relative w-full" style={{ aspectRatio: '16/9' }}>
                   <Image
                     src={venue.imageUrl}
-                    alt={name}
+                    alt={`${name} — ${cuisine} restaurant at Beach Rotana Abu Dhabi`}
                     fill
                     sizes="(max-width: 768px) 100vw, 600px"
                     className="object-cover"
@@ -114,11 +120,12 @@ export default function Recommendations({
                         {name}
                       </h2>
                       <p className="font-inter text-sm text-rotana-muted mt-1.5 line-clamp-2 leading-relaxed">
-                        {keyFeature}
+                        {description}
                       </p>
                     </div>
                     <span
                       className="text-rotana-gold text-xl mt-1 flex-shrink-0 font-light"
+                      aria-hidden="true"
                       style={{ transform: lang === 'ar' ? 'scaleX(-1)' : undefined }}
                     >
                       →
@@ -130,13 +137,30 @@ export default function Recommendations({
           })}
         </motion.div>
 
-        {/* Change mood */}
+        {/* Footer actions */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="flex justify-center pb-safe pb-8"
+          className="flex flex-col items-center gap-3 pb-safe pb-8"
         >
+          {/* Surprise re-roll — only for surprise-me mood */}
+          {onSurpriseAgain && (
+            <button
+              onClick={onSurpriseAgain}
+              className="
+                font-inter text-sm text-rotana-gold
+                border border-rotana-gold/30
+                rounded-xl px-6 py-3
+                hover:bg-rotana-gold/10
+                transition-colors duration-150
+              "
+            >
+              {t.surpriseAgain}
+            </button>
+          )}
+
+          {/* Change mood */}
           <button
             onClick={onChangeMood}
             className="
@@ -148,6 +172,19 @@ export default function Recommendations({
             "
           >
             {t.changeMood}
+          </button>
+
+          {/* View all — subtle escape hatch */}
+          <button
+            onClick={onViewAll}
+            className="
+              font-inter text-xs text-rotana-muted/60
+              hover:text-rotana-muted
+              transition-colors duration-150
+              py-1
+            "
+          >
+            {t.viewAllVenues}
           </button>
         </motion.div>
       </div>

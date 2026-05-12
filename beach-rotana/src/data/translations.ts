@@ -64,12 +64,16 @@ export interface Translations {
 
   back: string;
   errorRequired: string;
+  emailInvalid: string;
+
+  viewAllVenues: string;
+  surpriseAgain: string;
 }
 
 export const TRANSLATIONS: Record<Lang, Translations> = {
   en: {
     appName: 'TASTE',
-    tagline: 'Discover Beach Rotana dining, your way',
+    tagline: 'Taste Beach Rotana, your way.',
     poweredBy: 'Beach Rotana · Abu Dhabi',
 
     toggleLang: 'عربي',
@@ -146,11 +150,15 @@ export const TRANSLATIONS: Record<Lang, Translations> = {
 
     back: 'Back',
     errorRequired: 'This field is required',
+    emailInvalid: 'Please enter a valid email address',
+
+    viewAllVenues: 'View all dining venues',
+    surpriseAgain: 'Try another surprise',
   },
 
   ar: {
     appName: 'تيست',
-    tagline: 'اكتشف تجارب بيتش روتانا، بأسلوبك',
+    tagline: 'تذوّق بيتش روتانا، بأسلوبك.',
     poweredBy: 'بيتش روتانا · أبوظبي',
 
     toggleLang: 'English',
@@ -226,5 +234,9 @@ export const TRANSLATIONS: Record<Lang, Translations> = {
 
     back: 'رجوع',
     errorRequired: 'هذا الحقل مطلوب',
+    emailInvalid: 'أدخل بريداً إلكترونياً صحيحاً',
+
+    viewAllVenues: 'جميع مطاعمنا',
+    surpriseAgain: 'مفاجأة أخرى',
   },
 };

@@ -13,6 +13,7 @@ interface VenueDetailProps {
   onReserve: () => void;
   onSelectOther: (venue: Venue) => void;
   onChangeMood: () => void;
+  onViewAll: () => void;
 }
 
 export default function VenueDetail({
@@ -23,6 +24,7 @@ export default function VenueDetail({
   onReserve,
   onSelectOther,
   onChangeMood,
+  onViewAll,
 }: VenueDetailProps) {
   const name = lang === 'ar' ? venue.nameAr : venue.nameEn;
   const cuisine = lang === 'ar' ? venue.cuisineAr : venue.cuisine;
@@ -42,7 +44,7 @@ export default function VenueDetail({
         <div className="relative w-full" style={{ aspectRatio: '4/3' }}>
           <Image
             src={venue.imageUrl}
-            alt={name}
+            alt={`${name} — ${cuisine} dining at Beach Rotana Abu Dhabi`}
             fill
             sizes="100vw"
             className="object-cover"
@@ -137,13 +139,19 @@ export default function VenueDetail({
             </div>
           )}
 
-          {/* Change mood link */}
-          <div className="mt-8 flex justify-center">
+          {/* Escape routes */}
+          <div className="mt-8 flex flex-col items-center gap-3">
             <button
               onClick={onChangeMood}
               className="font-inter text-sm text-rotana-muted hover:text-rotana-sand transition-colors"
             >
               {t.changeMood}
+            </button>
+            <button
+              onClick={onViewAll}
+              className="font-inter text-xs text-rotana-muted/50 hover:text-rotana-muted transition-colors"
+            >
+              {t.viewAllVenues}
             </button>
           </div>
 

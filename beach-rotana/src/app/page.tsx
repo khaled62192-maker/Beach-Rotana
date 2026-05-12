@@ -3,7 +3,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { getRecommendations, FollowupAnswer } from '@/lib/recommendations';
-import { Venue, MoodKey, CravingKey } from '@/data/venues';
+import { Venue, MoodKey, CravingKey, VENUES } from '@/data/venues';
 import { Lang, TRANSLATIONS } from '@/data/translations';
 
 import Splash          from '@/components/Splash';
@@ -199,6 +199,17 @@ export default function Home() {
     setState((prev) => ({ ...prev, lang: prev.lang === 'en' ? 'ar' : 'en' }));
   }, []);
 
+  // Show all 12 venues — elegant escape hatch from recommendations/venue screens
+  const handleViewAll = useCallback(() => {
+    go('recommendations', { recommendations: VENUES, mood: null }, 1);
+  }, [go]);
+
+  // Re-roll surprise recommendations without leaving the screen
+  const handleSurpriseAgain = useCallback(() => {
+    const recs = getRecommendations('surprise-me', null, null);
+    setState((prev) => ({ ...prev, recommendations: recs }));
+  }, []);
+
   // ── Unique animation key ─────────────────────────────────────────
   // Venue screen: include venue id so switching venues triggers animation
   const animKey =
@@ -270,6 +281,8 @@ export default function Home() {
               venues={state.recommendations}
               onSelect={handleVenueSelect}
               onChangeMood={handleStartOver}
+              onViewAll={handleViewAll}
+              onSurpriseAgain={state.mood === 'surprise-me' ? handleSurpriseAgain : undefined}
             />
           )}
 
@@ -284,6 +297,7 @@ export default function Home() {
               onReserve={handleReserve}
               onSelectOther={handleVenueSelect}
               onChangeMood={handleStartOver}
+              onViewAll={handleViewAll}
             />
           )}
 
