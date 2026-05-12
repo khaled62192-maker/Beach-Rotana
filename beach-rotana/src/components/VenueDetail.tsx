@@ -1,9 +1,9 @@
 'use client';
 
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Lang, Translations } from '@/data/translations';
 import { Venue } from '@/data/venues';
+import { getVenueGradient } from '@/lib/venueGradients';
 
 interface VenueDetailProps {
   lang: Lang;
@@ -40,25 +40,33 @@ export default function VenueDetail({
     >
       {/* Scrollable content */}
       <div className="flex-1 overflow-y-auto no-scrollbar">
-        {/* Hero image */}
-        <div className="relative w-full" style={{ aspectRatio: '4/3', maxHeight: '420px' }}>
-          <Image
-            src={venue.imageUrl}
-            alt={`${name} — ${cuisine} dining at Beach Rotana Abu Dhabi`}
-            fill
-            sizes="100vw"
-            className="object-cover"
-            priority
+        {/* Hero — cuisine-palette gradient, no photography */}
+        <div
+          className="relative w-full"
+          style={{
+            height: '260px',
+            background: getVenueGradient(venue.id),
+          }}
+        >
+          {/* Warm gold accent glow */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background:
+                'radial-gradient(ellipse 80% 60% at 50% 100%, rgba(196,150,90,0.10) 0%, transparent 65%)',
+            }}
+            aria-hidden="true"
           />
-          {/* Gradient overlay — heavy at bottom */}
-          <div className="absolute inset-0 bg-gradient-to-t from-rotana-deep via-rotana-deep/30 to-transparent" />
 
-          {/* Pull handle indicator */}
+          {/* Fade to page background at bottom */}
+          <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-rotana-deep to-transparent" />
+
+          {/* Pull handle */}
           <div className="absolute top-3 left-1/2 -translate-x-1/2">
             <div className="w-10 h-1 rounded-full bg-white/20" />
           </div>
 
-          {/* Venue name on hero */}
+          {/* Venue name */}
           <div className="absolute bottom-0 left-0 right-0 px-6 pb-5 rtl:text-right">
             <h1 className="font-playfair text-4xl text-rotana-sand leading-tight">
               {name}

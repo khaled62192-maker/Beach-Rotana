@@ -12,35 +12,36 @@ interface MoodCardsProps {
   onSelect: (mood: MoodKey) => void;
 }
 
+// Mood card images are conceptual — they evoke the emotional register of each
+// mood, not specific Beach Rotana outlets. Using portrait crop for mobile.
 const MOODS: Array<{
   key: MoodKey;
   imageUrl: string;
-  accentColor: string;
 }> = [
   {
     key: 'light-social',
-    imageUrl: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&q=80',
-    accentColor: '#C4965A',
+    // Warm, inviting restaurant atmosphere — social dining energy
+    imageUrl: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=1100&fit=crop&crop=entropy&q=90',
   },
   {
     key: 'proper-dinner',
-    imageUrl: 'https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=900&q=80',
-    accentColor: '#C4965A',
+    // Elegant candlelit outdoor terrace — aspirational fine dining
+    imageUrl: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=1100&fit=crop&crop=entropy&q=90',
   },
   {
     key: 'drinks-atmosphere',
-    imageUrl: 'https://images.unsplash.com/photo-1551024709-8f23befc548e?w=900&q=80',
-    accentColor: '#C4965A',
+    // Craft cocktail close-up, moody warm lighting
+    imageUrl: 'https://images.unsplash.com/photo-1551024709-8f23befc548e?w=800&h=1100&fit=crop&crop=entropy&q=90',
   },
   {
     key: 'specific-craving',
-    imageUrl: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&q=80',
-    accentColor: '#C4965A',
+    // Vivid overhead food spread — indulgent variety
+    imageUrl: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=1100&fit=crop&crop=entropy&q=90',
   },
   {
     key: 'surprise-me',
-    imageUrl: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=900&q=80',
-    accentColor: '#C4965A',
+    // Overwater terrace dining at dusk — aspirational hero moment
+    imageUrl: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&h=1100&fit=crop&crop=entropy&q=90',
   },
 ];
 
