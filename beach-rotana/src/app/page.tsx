@@ -221,109 +221,170 @@ export default function Home() {
   const showChrome = !CHROME_LESS.includes(state.screen);
 
   return (
-    // Outer shell fills the viewport and centers the app on desktop
-    // On mobile it's edge-to-edge; on desktop it looks like a premium phone app
-    <div className="w-full bg-rotana-deep flex justify-center" style={{ minHeight: '100dvh' }}>
-    <main
-      className="relative w-full max-w-[430px] md:max-w-[720px] overflow-hidden bg-rotana-deep"
-      style={{ height: '100dvh' }}
-    >
-      {/* Language toggle */}
-      {showChrome && (
+    <>
+      {/* ── Desktop gate ─────────────────────────────────────────────
+          Shown only on md+ screens (≥768px). The app is QR-based and
+          mobile-first; desktop visitors see a clean holding page.      */}
+      <div
+        className="hidden md:flex flex-col items-center justify-center bg-rotana-deep relative overflow-hidden"
+        style={{ minHeight: '100dvh' }}
+        aria-label="Taste by Beach Rotana — mobile experience"
+      >
+        {/* Warm glow */}
         <div
-          className="absolute top-0 right-0 z-50 p-4 rtl:right-auto rtl:left-0"
-          style={{ paddingTop: 'max(1rem, env(safe-area-inset-top))' }}
-        >
-          <LanguageToggle
-            lang={state.lang}
-            onToggle={handleLangToggle}
-            label={t.toggleLang}
-          />
-        </div>
-      )}
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background: [
+              'radial-gradient(ellipse 70% 50% at 50% 100%, rgba(196,150,90,0.09) 0%, transparent 65%)',
+              'radial-gradient(ellipse 40% 30% at 50% 0%,   rgba(196,150,90,0.04) 0%, transparent 60%)',
+            ].join(', '),
+          }}
+        />
 
-      {/* Animated screen transitions */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={animKey}
-          {...animProps}
-          className="absolute inset-0 w-full"
+        <div className="relative z-10 flex flex-col items-center text-center max-w-sm px-8">
+          {/* Top rule */}
+          <div className="w-14 h-px bg-rotana-gold mb-8" />
+
+          {/* Wordmark */}
+          <h1
+            className="font-playfair text-rotana-sand tracking-[0.18em] uppercase mb-3"
+            style={{ fontSize: '52px' }}
+          >
+            Taste
+          </h1>
+          <p className="font-inter text-rotana-gold uppercase mb-1" style={{ fontSize: '11px', letterSpacing: '0.42em' }}>
+            by Beach Rotana
+          </p>
+          <p className="font-inter text-rotana-muted/55 uppercase" style={{ fontSize: '9px', letterSpacing: '0.5em' }}>
+            Abu Dhabi
+          </p>
+
+          {/* Bottom rule */}
+          <div className="w-14 h-px bg-rotana-gold mt-8 mb-10" />
+
+          {/* Message */}
+          <p className="font-playfair text-xl text-rotana-sand mb-4 leading-snug">
+            Designed for mobile guests
+          </p>
+          <p className="font-inter text-sm text-rotana-muted leading-relaxed">
+            Scan the QR code at your dining venue, or open this link on your phone to explore Beach Rotana&apos;s dining experiences.
+          </p>
+
+          {/* URL hint */}
+          <p className="font-inter text-rotana-gold/70 text-xs tracking-wider mt-8">
+            beach&#8209;rotana.vercel.app
+          </p>
+        </div>
+
+        <p className="absolute bottom-6 font-inter text-[9px] tracking-widest text-rotana-muted/35 uppercase">
+          Taste by Beach Rotana
+        </p>
+      </div>
+
+      {/* ── Mobile app ───────────────────────────────────────────────
+          Hidden on md+ screens; shown on phones and narrow tablets.   */}
+      <div className="md:hidden w-full bg-rotana-deep" style={{ minHeight: '100dvh' }}>
+        <main
+          className="relative w-full overflow-hidden bg-rotana-deep"
           style={{ height: '100dvh' }}
         >
-          {state.screen === 'splash' && (
-            <Splash lang={state.lang} t={t} onDone={handleSplashDone} />
+          {/* Language toggle */}
+          {showChrome && (
+            <div
+              className="absolute top-0 right-0 z-50 p-4 rtl:right-auto rtl:left-0"
+              style={{ paddingTop: 'max(1rem, env(safe-area-inset-top))' }}
+            >
+              <LanguageToggle
+                lang={state.lang}
+                onToggle={handleLangToggle}
+                label={t.toggleLang}
+              />
+            </div>
           )}
 
-          {state.screen === 'mood' && (
-            <MoodCards lang={state.lang} t={t} onSelect={handleMoodSelect} />
-          )}
-
-          {state.screen === 'craving' && (
-            <CravingGrid
-              lang={state.lang}
-              t={t}
-              onSelect={handleCravingSelect}
-              onBack={() => goBack('mood')}
-            />
-          )}
-
-          {state.screen === 'followup' && state.mood && (
-            <FollowUp
-              lang={state.lang}
-              t={t}
-              mood={state.mood}
-              onAnswer={handleFollowupAnswer}
-              onBack={() => goBack('mood')}
-            />
-          )}
-
-          {state.screen === 'recommendations' && (
-            <Recommendations
-              lang={state.lang}
-              t={t}
-              venues={state.recommendations}
-              onSelect={handleVenueSelect}
-              onChangeMood={handleStartOver}
-              onViewAll={handleViewAll}
-              onSurpriseAgain={state.mood === 'surprise-me' ? handleSurpriseAgain : undefined}
-            />
-          )}
-
-          {state.screen === 'venue' && state.selectedVenue && (
-            <VenueDetail
-              lang={state.lang}
-              t={t}
-              venue={state.selectedVenue}
-              otherVenues={state.recommendations.filter(
-                (v) => v.id !== state.selectedVenue!.id,
+          {/* Animated screen transitions */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={animKey}
+              {...animProps}
+              className="absolute inset-0 w-full"
+              style={{ height: '100dvh' }}
+            >
+              {state.screen === 'splash' && (
+                <Splash lang={state.lang} t={t} onDone={handleSplashDone} />
               )}
-              onReserve={handleReserve}
-              onSelectOther={handleVenueSelect}
-              onChangeMood={handleStartOver}
-              onViewAll={handleViewAll}
-            />
-          )}
 
-          {state.screen === 'reservation' && state.selectedVenue && (
-            <ReservationForm
-              lang={state.lang}
-              t={t}
-              venue={state.selectedVenue}
-              onSubmit={handleReservationSubmit}
-              onBack={() => goBack('venue')}
-            />
-          )}
+              {state.screen === 'mood' && (
+                <MoodCards lang={state.lang} t={t} onSelect={handleMoodSelect} />
+              )}
 
-          {state.screen === 'confirmation' && (
-            <Confirmation
-              lang={state.lang}
-              t={t}
-              onStartOver={handleStartOver}
-            />
-          )}
-        </motion.div>
-      </AnimatePresence>
-    </main>
-    </div>
+              {state.screen === 'craving' && (
+                <CravingGrid
+                  lang={state.lang}
+                  t={t}
+                  onSelect={handleCravingSelect}
+                  onBack={() => goBack('mood')}
+                />
+              )}
+
+              {state.screen === 'followup' && state.mood && (
+                <FollowUp
+                  lang={state.lang}
+                  t={t}
+                  mood={state.mood}
+                  onAnswer={handleFollowupAnswer}
+                  onBack={() => goBack('mood')}
+                />
+              )}
+
+              {state.screen === 'recommendations' && (
+                <Recommendations
+                  lang={state.lang}
+                  t={t}
+                  venues={state.recommendations}
+                  onSelect={handleVenueSelect}
+                  onChangeMood={handleStartOver}
+                  onViewAll={handleViewAll}
+                  onSurpriseAgain={state.mood === 'surprise-me' ? handleSurpriseAgain : undefined}
+                />
+              )}
+
+              {state.screen === 'venue' && state.selectedVenue && (
+                <VenueDetail
+                  lang={state.lang}
+                  t={t}
+                  venue={state.selectedVenue}
+                  otherVenues={state.recommendations.filter(
+                    (v) => v.id !== state.selectedVenue!.id,
+                  )}
+                  onReserve={handleReserve}
+                  onSelectOther={handleVenueSelect}
+                  onChangeMood={handleStartOver}
+                  onViewAll={handleViewAll}
+                />
+              )}
+
+              {state.screen === 'reservation' && state.selectedVenue && (
+                <ReservationForm
+                  lang={state.lang}
+                  t={t}
+                  venue={state.selectedVenue}
+                  onSubmit={handleReservationSubmit}
+                  onBack={() => goBack('venue')}
+                />
+              )}
+
+              {state.screen === 'confirmation' && (
+                <Confirmation
+                  lang={state.lang}
+                  t={t}
+                  onStartOver={handleStartOver}
+                />
+              )}
+            </motion.div>
+          </AnimatePresence>
+        </main>
+      </div>
+    </>
   );
 }

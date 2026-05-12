@@ -49,7 +49,7 @@ export default function Recommendations({
       {/* Venue cards */}
       <div className="flex-1 overflow-y-auto no-scrollbar px-5">
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-4 py-4"
+          className="flex flex-col gap-4 py-4"
           initial="hidden"
           animate="show"
           variants={{
