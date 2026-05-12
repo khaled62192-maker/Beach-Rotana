@@ -1,6 +1,7 @@
 'use client';
 
 import { useRef, useState } from 'react';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Lang, Translations } from '@/data/translations';
 import { MoodKey } from '@/data/venues';
@@ -13,15 +14,34 @@ interface MoodCardsProps {
 
 const MOODS: Array<{
   key: MoodKey;
-  gradientFrom: string;
-  gradientTo: string;
-  icon: string;
+  imageUrl: string;
+  accentColor: string;
 }> = [
-  { key: 'light-social',      gradientFrom: '#0D2E3A', gradientTo: '#0B1C2C', icon: '☀' },
-  { key: 'proper-dinner',     gradientFrom: '#2C1A0A', gradientTo: '#0B1C2C', icon: '✦' },
-  { key: 'drinks-atmosphere', gradientFrom: '#1A0A2C', gradientTo: '#0B1C2C', icon: '◆' },
-  { key: 'specific-craving',  gradientFrom: '#0A2418', gradientTo: '#0B1C2C', icon: '◎' },
-  { key: 'surprise-me',       gradientFrom: '#1C200A', gradientTo: '#0B1C2C', icon: '✦' },
+  {
+    key: 'light-social',
+    imageUrl: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&q=80',
+    accentColor: '#C4965A',
+  },
+  {
+    key: 'proper-dinner',
+    imageUrl: 'https://images.unsplash.com/photo-1424847651672-bf20a4b0982b?w=900&q=80',
+    accentColor: '#C4965A',
+  },
+  {
+    key: 'drinks-atmosphere',
+    imageUrl: 'https://images.unsplash.com/photo-1551024709-8f23befc548e?w=900&q=80',
+    accentColor: '#C4965A',
+  },
+  {
+    key: 'specific-craving',
+    imageUrl: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&q=80',
+    accentColor: '#C4965A',
+  },
+  {
+    key: 'surprise-me',
+    imageUrl: 'https://images.unsplash.com/photo-1547592166-23ac45744acd?w=900&q=80',
+    accentColor: '#C4965A',
+  },
 ];
 
 export default function MoodCards({ lang, t, onSelect }: MoodCardsProps) {
@@ -43,7 +63,7 @@ export default function MoodCards({ lang, t, onSelect }: MoodCardsProps) {
       style={{ height: '100dvh' }}
     >
       {/* Header */}
-      <div className="pt-safe px-6 pt-16 pb-6 flex-shrink-0">
+      <div className="pt-safe px-6 pt-16 pb-5 flex-shrink-0">
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -58,11 +78,11 @@ export default function MoodCards({ lang, t, onSelect }: MoodCardsProps) {
         </motion.div>
       </div>
 
-      {/* Scroll area */}
+      {/* Scroll area — horizontal on all screen sizes */}
       <div
         ref={scrollRef}
         onScroll={handleScroll}
-        className="mood-scroll flex gap-4 flex-1 pb-4"
+        className="mood-scroll flex gap-3 flex-1 pb-4"
         style={{
           paddingLeft: '24px',
           paddingRight: '24px',
@@ -70,19 +90,22 @@ export default function MoodCards({ lang, t, onSelect }: MoodCardsProps) {
           direction: lang === 'ar' ? 'rtl' : 'ltr',
           alignItems: 'stretch',
         }}
+        aria-label={lang === 'ar' ? 'اختر مزاجك' : 'Mood selection'}
+        role="region"
+        aria-roledescription="carousel"
       >
         {MOODS.map((mood, idx) => {
           const label = t.moods[mood.key].label;
-          const sub = t.moods[mood.key].sub;
+          const sub   = t.moods[mood.key].sub;
 
           return (
             <motion.button
               key={mood.key}
-              className="mood-card-snap flex-shrink-0 rounded-3xl relative overflow-hidden text-left rtl:text-right flex flex-col justify-end"
+              className="mood-card-snap flex-shrink-0 rounded-2xl relative overflow-hidden text-left rtl:text-right flex flex-col justify-end"
               style={{
-                width: '85vw',
-                minHeight: '60dvh',
-                background: `linear-gradient(160deg, ${mood.gradientFrom} 0%, ${mood.gradientTo} 100%)`,
+                // Clamp: 85vw on small phones, cap at 340px so desktop shows 2 cards
+                width: 'min(85vw, 340px)',
+                minHeight: 'min(58dvh, 520px)',
                 flexShrink: 0,
               }}
               whileTap={{ scale: 0.97 }}
@@ -92,31 +115,34 @@ export default function MoodCards({ lang, t, onSelect }: MoodCardsProps) {
               animate={{ opacity: 1, y: 0, transition: { delay: idx * 0.06, duration: 0.4 } }}
               aria-label={label}
             >
-              {/* Subtle grid texture overlay */}
-              <div
-                className="absolute inset-0 opacity-5"
-                style={{
-                  backgroundImage: 'radial-gradient(circle, #C4965A 1px, transparent 1px)',
-                  backgroundSize: '24px 24px',
-                }}
-              />
-
-              {/* Bottom gradient */}
-              <div className="absolute bottom-0 left-0 right-0 h-2/3 bg-gradient-to-t from-black/40 to-transparent" />
+              {/* Background image */}
+              <div className="absolute inset-0">
+                <Image
+                  src={mood.imageUrl}
+                  alt={label}
+                  fill
+                  sizes="(max-width: 768px) 85vw, 340px"
+                  className="object-cover"
+                  priority={idx < 2}
+                />
+                {/* Dark gradient — heavy at bottom so text is always legible */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
+              </div>
 
               {/* Content */}
-              <div className="relative z-10 p-7">
-                <div className="w-8 h-px bg-rotana-gold mb-5" />
-                <h2 className="font-playfair text-2xl xs:text-3xl text-rotana-sand leading-snug mb-2">
+              <div className="relative z-10 p-6">
+                <div className="w-7 h-px bg-rotana-gold mb-4" />
+                <h2 className="font-playfair text-2xl text-white leading-snug mb-1.5">
                   {label}
                 </h2>
-                <p className="font-inter text-sm text-rotana-muted">{sub}</p>
+                <p className="font-inter text-sm text-white/65">{sub}</p>
 
                 {/* Arrow */}
-                <div className="flex justify-end mt-6 rtl:justify-start">
+                <div className="flex justify-end mt-5 rtl:justify-start">
                   <span
                     className="text-rotana-gold text-xl font-light"
                     style={{ transform: lang === 'ar' ? 'scaleX(-1)' : undefined }}
+                    aria-hidden="true"
                   >
                     →
                   </span>
@@ -127,18 +153,18 @@ export default function MoodCards({ lang, t, onSelect }: MoodCardsProps) {
         })}
 
         {/* End spacer */}
-        <div className="flex-shrink-0 w-6" aria-hidden />
+        <div className="flex-shrink-0 w-4" aria-hidden />
       </div>
 
       {/* Pagination dots */}
-      <div className="flex justify-center gap-2 py-5 flex-shrink-0">
+      <div className="flex justify-center gap-2 py-4 flex-shrink-0" aria-hidden="true">
         {MOODS.map((_, idx) => (
           <motion.div
             key={idx}
             animate={{
-              width: idx === activeIndex ? 20 : 6,
+              width:           idx === activeIndex ? 22 : 6,
               backgroundColor: idx === activeIndex ? '#C4965A' : '#8BA3B6',
-              opacity: idx === activeIndex ? 1 : 0.4,
+              opacity:         idx === activeIndex ? 1 : 0.35,
             }}
             transition={{ duration: 0.25 }}
             className="h-1.5 rounded-full"

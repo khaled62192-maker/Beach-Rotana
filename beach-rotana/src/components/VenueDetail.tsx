@@ -41,7 +41,7 @@ export default function VenueDetail({
       {/* Scrollable content */}
       <div className="flex-1 overflow-y-auto no-scrollbar">
         {/* Hero image */}
-        <div className="relative w-full" style={{ aspectRatio: '4/3' }}>
+        <div className="relative w-full" style={{ aspectRatio: '4/3', maxHeight: '420px' }}>
           <Image
             src={venue.imageUrl}
             alt={`${name} — ${cuisine} dining at Beach Rotana Abu Dhabi`}
@@ -124,11 +124,11 @@ export default function VenueDetail({
                     whileTap={{ scale: 0.96 }}
                     onClick={() => onSelectOther(v)}
                     className="
-                      rounded-xl border border-rotana-surface
+                      rounded-xl border border-rotana-gold/30
                       bg-rotana-navy
                       px-4 py-2.5
-                      font-inter text-sm text-rotana-sand
-                      hover:border-rotana-gold/40
+                      font-inter text-sm text-rotana-gold
+                      hover:bg-rotana-gold/10
                       transition-colors duration-150
                     "
                   >
@@ -143,13 +143,19 @@ export default function VenueDetail({
           <div className="mt-8 flex flex-col items-center gap-3">
             <button
               onClick={onChangeMood}
-              className="font-inter text-sm text-rotana-muted hover:text-rotana-sand transition-colors"
+              className="
+                w-full rounded-xl border border-rotana-surface
+                py-3.5 px-5
+                font-inter text-sm text-rotana-sand
+                hover:bg-rotana-surface/50
+                transition-colors duration-150
+              "
             >
               {t.changeMood}
             </button>
             <button
               onClick={onViewAll}
-              className="font-inter text-xs text-rotana-muted/50 hover:text-rotana-muted transition-colors"
+              className="font-inter text-sm text-rotana-gold hover:text-rotana-gold-light transition-colors underline underline-offset-4"
             >
               {t.viewAllVenues}
             </button>

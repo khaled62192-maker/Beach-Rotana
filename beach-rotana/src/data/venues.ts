@@ -117,7 +117,7 @@ export const VENUES: Venue[] = [
     keyFeatureAr: 'مشوي بالفحم · قبو نبيذ حائز جوائز · ضيافة راقية',
     tags: ['steak', 'fine-dining', 'indoor', 'wine', 'elevated'],
     moodTags: ['proper-dinner', 'surprise-me'],
-    imageUrl: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1200&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1546241072-48010ad2862c?w=1200&q=80',
   },
   {
     id: 'brauhaus',

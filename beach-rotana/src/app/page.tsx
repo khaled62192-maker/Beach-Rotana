@@ -225,7 +225,7 @@ export default function Home() {
     // On mobile it's edge-to-edge; on desktop it looks like a premium phone app
     <div className="w-full bg-rotana-deep flex justify-center" style={{ minHeight: '100dvh' }}>
     <main
-      className="relative w-full max-w-[430px] overflow-hidden bg-rotana-deep"
+      className="relative w-full max-w-[430px] md:max-w-[720px] overflow-hidden bg-rotana-deep"
       style={{ height: '100dvh' }}
     >
       {/* Language toggle */}

@@ -49,7 +49,7 @@ export default function Recommendations({
       {/* Venue cards */}
       <div className="flex-1 overflow-y-auto no-scrollbar px-5">
         <motion.div
-          className="flex flex-col gap-4 py-4"
+          className="grid grid-cols-1 md:grid-cols-2 gap-4 py-4"
           initial="hidden"
           animate="show"
           variants={{
@@ -91,7 +91,7 @@ export default function Recommendations({
                     src={venue.imageUrl}
                     alt={`${name} — ${cuisine} restaurant at Beach Rotana Abu Dhabi`}
                     fill
-                    sizes="(max-width: 768px) 100vw, 600px"
+                    sizes="(max-width: 768px) 100vw, 350px"
                     className="object-cover"
                     priority={idx === 0}
                   />
