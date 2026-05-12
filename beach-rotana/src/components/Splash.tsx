@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import Image from 'next/image';
 import { motion, useReducedMotion } from 'framer-motion';
 import { Lang, Translations } from '@/data/translations';
 
@@ -62,11 +63,23 @@ export default function Splash({ lang, t, onDone }: SplashProps) {
         }}
       />
 
-      {/* ── Typography-only branding ───────────────────────────────── */}
+      {/* ── Branding ───────────────────────────────────────────────── */}
       <div className="relative z-10 flex flex-col items-center px-8 text-center">
 
+        {/* Official Rotana Hotels & Resorts logo — exact public asset from rotana.com CDN */}
+        <motion.div {...riseIn(0.05)} className="mb-7">
+          <Image
+            src="/rotana-logo.png"
+            alt="Rotana Hotels & Resorts"
+            width={130}
+            height={51}
+            className="opacity-85"
+            priority
+          />
+        </motion.div>
+
         {/* Top rule */}
-        <motion.div {...scaleIn(0.1)} className="w-16 h-px bg-rotana-gold mb-8" />
+        <motion.div {...scaleIn(0.14)} className="w-16 h-px bg-rotana-gold mb-8" />
 
         {/* TASTE wordmark */}
         <motion.span
