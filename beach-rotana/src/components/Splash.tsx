@@ -107,15 +107,16 @@ export default function Splash({ lang, t, onDone }: SplashProps) {
         }}
       />
 
-      {/* Oversized background watermark — Rotana emblem, ultra-low opacity */}
+      {/* Oversized background watermark — Rotana emblem, barely perceptible */}
       {!reduced && (
         <motion.div
           initial={{ opacity: 0, scale: 1.06 }}
-          animate={{ opacity: 0.045, scale: 1 }}
+          animate={{ opacity: 0.018, scale: 1 }}
           transition={{ duration: 2.4, ease }}
-          className="absolute inset-0 flex items-center justify-center pointer-events-none"
+          className="absolute pointer-events-none"
+          style={{ bottom: '-60px', left: '50%', transform: 'translateX(-50%)' }}
         >
-          <RotanaEmblem size={360} color="#C4965A" />
+          <RotanaEmblem size={320} color="#C4965A" />
         </motion.div>
       )}
 

@@ -114,9 +114,14 @@ export default function ReservationForm({
         </motion.div>
       </div>
 
-      {/* Form */}
-      <div className="flex-1 overflow-y-auto no-scrollbar">
-        <form onSubmit={handleSubmit} noValidate aria-label={`${t.reservationTitle} ${venueName}`}>
+      {/* Form — scrollable region */}
+      <form
+        id="reservation-form"
+        onSubmit={handleSubmit}
+        noValidate
+        aria-label={`${t.reservationTitle} ${venueName}`}
+        className="flex-1 overflow-y-auto no-scrollbar"
+      >
           <div className="px-6 pb-4 space-y-5">
 
             {/* Required fields note */}
@@ -294,34 +299,33 @@ export default function ReservationForm({
               </div>
             </div>
 
-            <div className="h-28" />
-          </div>
-
-          {/* Sticky submit */}
-          <div
-            className="
-              fixed bottom-0 left-0 right-0
-              bg-rotana-deep/95 backdrop-blur-sm
-              border-t border-rotana-surface
-              px-5 pt-4
-            "
-            style={{ paddingBottom: 'max(1.25rem, env(safe-area-inset-bottom))' }}
-          >
-            <motion.button
-              type="submit"
-              whileTap={{ scale: 0.97 }}
-              className="
-                w-full
-                bg-rotana-gold hover:bg-rotana-gold-light
-                text-rotana-deep font-inter font-semibold text-[15px]
-                rounded-xl py-4
-                transition-colors duration-150
-              "
-            >
-              {t.submitButton}
-            </motion.button>
-          </div>
+            </div>
         </form>
+
+      {/* Sticky submit — flex-shrink-0 sibling, not fixed, so it respects max-width on desktop */}
+      <div
+        className="
+          flex-shrink-0
+          bg-rotana-deep/95 backdrop-blur-sm
+          border-t border-rotana-surface
+          px-5 pt-4
+        "
+        style={{ paddingBottom: 'max(1.25rem, env(safe-area-inset-bottom))' }}
+      >
+        <motion.button
+          type="submit"
+          form="reservation-form"
+          whileTap={{ scale: 0.97 }}
+          className="
+            w-full
+            bg-rotana-gold hover:bg-rotana-gold-light
+            text-rotana-deep font-inter font-semibold text-[15px]
+            rounded-xl py-4
+            transition-colors duration-150
+          "
+        >
+          {t.submitButton}
+        </motion.button>
       </div>
     </div>
   );

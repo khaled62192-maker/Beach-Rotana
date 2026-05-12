@@ -221,8 +221,11 @@ export default function Home() {
   const showChrome = !CHROME_LESS.includes(state.screen);
 
   return (
+    // Outer shell fills the viewport and centers the app on desktop
+    // On mobile it's edge-to-edge; on desktop it looks like a premium phone app
+    <div className="w-full bg-rotana-deep flex justify-center" style={{ minHeight: '100dvh' }}>
     <main
-      className="relative w-full overflow-hidden bg-rotana-deep"
+      className="relative w-full max-w-[430px] overflow-hidden bg-rotana-deep"
       style={{ height: '100dvh' }}
     >
       {/* Language toggle */}
@@ -321,5 +324,6 @@ export default function Home() {
         </motion.div>
       </AnimatePresence>
     </main>
+    </div>
   );
 }
