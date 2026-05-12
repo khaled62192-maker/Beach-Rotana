@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS custom properties ─────────────────────────────── */
+:root {
+  --sat: env(safe-area-inset-top);
+  --sar: env(safe-area-inset-right);
+  --sab: env(safe-area-inset-bottom);
+  --sal: env(safe-area-inset-left);
+}
+
+/* ── Base resets ────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  height: 100%;
+  overscroll-behavior: none;
+}
+
+body {
+  min-height: 100dvh;
+  background-color: #0B1C2C;
+  color: #F2E8D5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+}
+
+/* ── Scroll-snap for mood cards ───────────────────────── */
+.mood-scroll {
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: scroll;
+  scrollbar-width: none;
+}
+.mood-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.mood-card-snap {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* ── Hide scrollbar globally ──────────────────────────── */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Prevent iOS input zoom (must be >= 16px) ─────────── */
+input,
+select,
+textarea {
+  font-size: 16px !important;
+}
+
+/* ── Arabic font override ────────────────────────────── */
+[dir='rtl'] {
+  font-family: var(--font-cairo), sans-serif;
+  letter-spacing: 0;
+}
+
+/* ── Focus ring system ───────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #C4965A;
+  outline-offset: 2px;
+}
+
+/* ── Safe area padding utilities ─────────────────────── */
+.pb-safe {
+  padding-bottom: max(1.25rem, env(safe-area-inset-bottom));
+}
+.pt-safe {
+  padding-top: max(1rem, env(safe-area-inset-top));
+}
