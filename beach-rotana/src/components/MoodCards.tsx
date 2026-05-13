@@ -27,28 +27,32 @@ const MOODS: Array<{
 }> = [
   {
     key: 'light-social',
-    imageUrl: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=900&h=1200&fit=crop&crop=center&q=85',
+    // Beach Garden — alfresco beachside dining, Abu Dhabi skyline backdrop
+    imageUrl: 'https://media.rotana.com/images/beachrotana/rlg_1759496681962_575.jpg',
     gradient: 'linear-gradient(160deg,#1A3A4A 0%,#0F2535 55%,#0B1C2C 100%)',
   },
   {
     key: 'proper-dinner',
-    imageUrl: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&h=1200&fit=crop&crop=center&q=85',
+    // Rodeo Grill — premium fine-dining interior, charcoal grill atmosphere
+    imageUrl: 'https://media.rotana.com/images/beachrotana/rlg_1754565984136_575.jpg',
     gradient: 'linear-gradient(160deg,#2A1A0A 0%,#1A0D04 55%,#0B1C2C 100%)',
   },
   {
     key: 'drinks-atmosphere',
-    // Upscale lounge/evening ambience — warm hospitality setting
-    imageUrl: 'https://images.unsplash.com/photo-1559305616-3f99cd43e353?w=900&h=1200&fit=crop&crop=center&q=85',
+    // Trader Vic's — evening restaurant & lounge, tiki atmosphere
+    imageUrl: 'https://media.rotana.com/images/beachrotana/rlg_1754565960782_575.jpg',
     gradient: 'linear-gradient(160deg,#1E0A2E 0%,#130518 55%,#0B1C2C 100%)',
   },
   {
     key: 'specific-craving',
-    imageUrl: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=900&h=1200&fit=crop&crop=center&q=85',
+    // Benihana — live teppanyaki show, food at the centre of the experience
+    imageUrl: 'https://media.rotana.com/images/beachrotana/rlg_1754566023699_575.jpg',
     gradient: 'linear-gradient(160deg,#0A2A1A 0%,#051508 55%,#0B1C2C 100%)',
   },
   {
     key: 'surprise-me',
-    imageUrl: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=900&h=1200&fit=crop&crop=center&q=85',
+    // Finz — Michelin-selected overwater terrace, the most iconic Beach Rotana dining visual
+    imageUrl: 'https://media.rotana.com/images/beachrotana/rlg_1754639160985_417.jpg',
     gradient: 'linear-gradient(160deg,#1A2A0A 0%,#0E1804 55%,#0B1C2C 100%)',
   },
 ];
