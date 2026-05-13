@@ -12,42 +12,56 @@ interface MoodCardsProps {
   onSelect: (mood: MoodKey) => void;
 }
 
-// Mood card images are conceptual — they evoke the emotional register of each
-// mood, not specific Beach Rotana outlets. Using portrait crop for mobile.
+// Each mood card has an image + a premium gradient fallback.
+// If the image fails to load for ANY reason, the gradient renders instantly —
+// guests never see a broken placeholder or missing-image icon.
 const MOODS: Array<{
   key: MoodKey;
   imageUrl: string;
+  // Premium fallback gradient — shown if image errors or as base layer
+  gradient: string;
 }> = [
   {
     key: 'light-social',
     // Warm, inviting restaurant atmosphere — social dining energy
     imageUrl: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=1100&fit=crop&crop=entropy&q=90',
+    gradient: 'linear-gradient(160deg, #1A3A4A 0%, #0F2535 50%, #0B1C2C 100%)',
   },
   {
     key: 'proper-dinner',
     // Elegant candlelit outdoor terrace — aspirational fine dining
     imageUrl: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=1100&fit=crop&crop=entropy&q=90',
+    gradient: 'linear-gradient(160deg, #2A1A0A 0%, #1A0D04 50%, #0B1C2C 100%)',
   },
   {
     key: 'drinks-atmosphere',
-    // Craft cocktail close-up, moody warm lighting
-    imageUrl: 'https://images.unsplash.com/photo-1551024709-8f23befc548e?w=800&h=1100&fit=crop&crop=entropy&q=90',
+    // Moody upscale bar — warm amber bottles, dark atmosphere
+    imageUrl: 'https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=800&h=1100&fit=crop&crop=entropy&q=90',
+    gradient: 'linear-gradient(160deg, #1E0A2E 0%, #120518 50%, #0B1C2C 100%)',
   },
   {
     key: 'specific-craving',
     // Vivid overhead food spread — indulgent variety
     imageUrl: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=1100&fit=crop&crop=entropy&q=90',
+    gradient: 'linear-gradient(160deg, #0A2A1A 0%, #051508 50%, #0B1C2C 100%)',
   },
   {
     key: 'surprise-me',
     // Overwater terrace dining at dusk — aspirational hero moment
     imageUrl: 'https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&h=1100&fit=crop&crop=entropy&q=90',
+    gradient: 'linear-gradient(160deg, #1A2A0A 0%, #0E1804 50%, #0B1C2C 100%)',
   },
 ];
 
 export default function MoodCards({ lang, t, onSelect }: MoodCardsProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
+  // Track per-card image errors — if a card's image fails, show its gradient instead
+  const [imgErrors, setImgErrors] = useState<Record<string, boolean>>({});
+
+  const handleImgError = (key: string) => {
+    setImgErrors(prev => ({ ...prev, [key]: true }));
+  };
 
   const handleScroll = () => {
     const el = scrollRef.current;
@@ -98,6 +112,7 @@ export default function MoodCards({ lang, t, onSelect }: MoodCardsProps) {
         {MOODS.map((mood, idx) => {
           const label = t.moods[mood.key].label;
           const sub   = t.moods[mood.key].sub;
+          const hasError = imgErrors[mood.key] ?? false;
 
           return (
             <motion.button
@@ -108,6 +123,9 @@ export default function MoodCards({ lang, t, onSelect }: MoodCardsProps) {
                 width: 'min(85vw, 340px)',
                 minHeight: 'min(58dvh, 520px)',
                 flexShrink: 0,
+                // Premium gradient is always present as base layer — visible if image
+                // hasn't loaded yet or has errored
+                background: mood.gradient,
               }}
               whileTap={{ scale: 0.97 }}
               transition={{ type: 'spring', stiffness: 400, damping: 25 }}
@@ -116,19 +134,23 @@ export default function MoodCards({ lang, t, onSelect }: MoodCardsProps) {
               animate={{ opacity: 1, y: 0, transition: { delay: idx * 0.06, duration: 0.4 } }}
               aria-label={label}
             >
-              {/* Background image */}
-              <div className="absolute inset-0">
-                <Image
-                  src={mood.imageUrl}
-                  alt={label}
-                  fill
-                  sizes="(max-width: 768px) 85vw, 340px"
-                  className="object-cover"
-                  priority={idx < 2}
-                />
-                {/* Dark gradient — heavy at bottom so text is always legible */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
-              </div>
+              {/* Background image — only rendered when no error */}
+              {!hasError && (
+                <div className="absolute inset-0">
+                  <Image
+                    src={mood.imageUrl}
+                    alt=""
+                    fill
+                    sizes="(max-width: 768px) 85vw, 340px"
+                    className="object-cover"
+                    priority={idx < 2}
+                    onError={() => handleImgError(mood.key)}
+                  />
+                </div>
+              )}
+
+              {/* Dark gradient — always present so text is legible over image or gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />
 
               {/* Content */}
               <div className="relative z-10 p-6">
