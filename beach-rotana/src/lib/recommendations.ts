@@ -11,7 +11,7 @@ const CRAVING_MAP: Record<CravingKey, string[]> = {
   pizza:             ['pregos'],
   indian:            ['indigo'],
   'coffee-pastries': ['cafe-columbia'],
-  cocktails:         ['trader-vics', 'al-shorfa'],
+  cocktails:         ['al-shorfa', 'bay-view'],
   shisha:            ['al-shorfa'],
   dessert:           ['cafe-columbia', 'essence'],
   lighter:           ['cafe-columbia', 'bay-view', 'beach-garden'],

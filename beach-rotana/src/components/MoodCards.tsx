@@ -37,8 +37,8 @@ const MOODS: Array<{
   },
   {
     key: 'drinks-atmosphere',
-    // Warm amber cocktails — moody upscale bar with golden lighting
-    imageUrl: 'https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=900&h=1200&fit=crop&crop=center&q=85',
+    // Upscale lounge/evening ambience — warm hospitality setting
+    imageUrl: 'https://images.unsplash.com/photo-1559305616-3f99cd43e353?w=900&h=1200&fit=crop&crop=center&q=85',
     gradient: 'linear-gradient(160deg,#1E0A2E 0%,#130518 55%,#0B1C2C 100%)',
   },
   {
