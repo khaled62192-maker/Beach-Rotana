@@ -27,32 +27,32 @@ const MOODS: Array<{
 }> = [
   {
     key: 'light-social',
-    // Beach Garden — alfresco beachside dining, Abu Dhabi skyline backdrop
-    imageUrl: 'https://media.rotana.com/images/beachrotana/rlg_1759496681962_575.jpg',
+    // Beach Garden — aerial dusk shot of the full beachside property, lanterns lit, palm-lined tables
+    imageUrl: 'https://media.rotana.com/outletgallery/CIL1759497077753.jpg',
     gradient: 'linear-gradient(160deg,#1A3A4A 0%,#0F2535 55%,#0B1C2C 100%)',
   },
   {
     key: 'proper-dinner',
-    // Rodeo Grill — premium fine-dining interior, charcoal grill atmosphere
-    imageUrl: 'https://media.rotana.com/images/beachrotana/rlg_1754565984136_575.jpg',
+    // Rodeo Grill — couple dining by candlelight, warm golden atmosphere, intimate fine dining
+    imageUrl: 'https://media.rotana.com/images/beachrotana/rc_175518196136_417.jpg',
     gradient: 'linear-gradient(160deg,#2A1A0A 0%,#1A0D04 55%,#0B1C2C 100%)',
   },
   {
     key: 'drinks-atmosphere',
-    // Trader Vic's — evening restaurant & lounge, tiki atmosphere
-    imageUrl: 'https://media.rotana.com/images/beachrotana/rlg_1754565960782_575.jpg',
+    // Trader Vic's — exotic tiki interior, rattan pendants, teal booths, evening restaurant atmosphere
+    imageUrl: 'https://media.rotana.com/outletgallery/CIL1754583293898.jpg',
     gradient: 'linear-gradient(160deg,#1E0A2E 0%,#130518 55%,#0B1C2C 100%)',
   },
   {
     key: 'specific-craving',
-    // Benihana — live teppanyaki show, food at the centre of the experience
-    imageUrl: 'https://media.rotana.com/images/beachrotana/rlg_1754566023699_575.jpg',
+    // Benihana — chef at teppanyaki counter, Abu Dhabi skyline backdrop, food as the hero
+    imageUrl: 'https://media.rotana.com/outletgallery/CIL1754583620280.jpg',
     gradient: 'linear-gradient(160deg,#0A2A1A 0%,#051508 55%,#0B1C2C 100%)',
   },
   {
     key: 'surprise-me',
-    // Finz — Michelin-selected overwater terrace, the most iconic Beach Rotana dining visual
-    imageUrl: 'https://media.rotana.com/images/beachrotana/rlg_1754639160985_417.jpg',
+    // Finz — iconic overwater terrace, set tables, Abu Dhabi skyline — the definitive Beach Rotana dining visual
+    imageUrl: 'https://media.rotana.com/outletgallery/CIL1762344383453.jpg',
     gradient: 'linear-gradient(160deg,#1A2A0A 0%,#0E1804 55%,#0B1C2C 100%)',
   },
 ];
