@@ -977,7 +977,7 @@ header#nav{
 }
 
 /* Scroll-margin-top so anchors clear the fixed nav */
-#services, #work, #process, #contact, #studio, #about, #top{
+#work, #process, #contact, #studio, #about, #top{
   scroll-margin-top:80px;
 }
 
@@ -1069,12 +1069,12 @@ select{
 <!-- ========== NAV ========== -->
 <header id="nav" class="fixed top-0 left-0 right-0 z-40 transition-all duration-500" style="transition:background .5s var(--ease), border-color .5s var(--ease);">
   <nav class="max-w-7xl mx-auto px-6 lg:px-10 py-5 flex items-center justify-between">
-    <a href="#top" class="text-navy font-display text-xl tracking-tight">ManageFlow<span class="text-gold">.</span></a>
+    <a href="#top" class="text-navy font-display text-[22px] tracking-tight">ManageFlow<span class="text-gold">.</span></a>
 
     <div class="hidden lg:flex items-center gap-9 text-[14px] font-medium text-navy/75">
-      <a href="#services" class="nav-link" data-en="Services" data-ar="الخدمات">Services</a>
       <a href="#work" class="nav-link" data-en="Our Work" data-ar="أعمالنا">Our Work</a>
       <a href="#process" class="nav-link" data-en="Process" data-ar="منهجنا">Process</a>
+      <a href="#studio" class="nav-link" data-en="About" data-ar="عنّا">About</a>
       <a href="#contact" class="nav-link" data-en="Contact" data-ar="تواصل معنا">Contact</a>
     </div>
 
@@ -1096,9 +1096,9 @@ select{
   <button id="mobileClose" class="absolute top-6 right-6 w-10 h-10 flex items-center justify-center text-navy" aria-label="Close menu">
     <i data-lucide="x" class="w-6 h-6"></i>
   </button>
-  <a href="#services" class="mobile-link text-navy text-2xl font-display py-3 border-b border-navy/10" data-en="Services" data-ar="الخدمات">Services</a>
   <a href="#work" class="mobile-link text-navy text-2xl font-display py-3 border-b border-navy/10" data-en="Our Work" data-ar="أعمالنا">Our Work</a>
   <a href="#process" class="mobile-link text-navy text-2xl font-display py-3 border-b border-navy/10" data-en="Process" data-ar="منهجنا">Process</a>
+  <a href="#studio" class="mobile-link text-navy text-2xl font-display py-3 border-b border-navy/10" data-en="About" data-ar="عنّا">About</a>
   <a href="#contact" class="mobile-link text-navy text-2xl font-display py-3 border-b border-navy/10" data-en="Contact" data-ar="تواصل معنا">Contact</a>
   <button id="mobileLang" class="text-navy/70 text-base mt-4 self-start py-2" data-en="Switch to العربية" data-ar="Switch to English">Switch to العربية</button>
   <a href="https://wa.me/9715681115344" target="_blank" rel="noopener" class="btn btn-gold mt-6 w-full" data-en="Book a Free Consultation" data-ar="احجز استشارتك المجانية">Book a Free Consultation</a>
@@ -1286,283 +1286,348 @@ select{
   </div>
 </section>
 
-<!-- ========== SERVICES ========== -->
-<section id="services" class="py-20 lg:py-28 bg-warm relative">
-  <div class="max-w-7xl mx-auto px-6 lg:px-10">
-    <div class="max-w-3xl mb-16 lg:mb-24 reveal">
-      <div class="eyebrow mb-6" data-en="What We Do" data-ar="ماذا نقدّم">What We Do</div>
-      <h2 class="section-title text-navy" data-en="Everything your business needs to look premium and get noticed." data-ar="كل ما يحتاجه مشروعك ليبدو احترافياً ويُلفت الأنظار.">
-        Everything your business needs to look premium and get noticed.
-      </h2>
-    </div>
+<!-- ========== OUR WORK ========== -->
+<style>
+.cmp-item{
+  background:linear-gradient(180deg, rgba(248,241,225,.025) 0%, rgba(248,241,225,.01) 100%);
+  border:1px solid rgba(248,241,225,.09);
+  border-radius:24px;
+  overflow:hidden;
+  transition:border-color .5s var(--ease);
+}
+.cmp-item:hover{ border-color:rgba(212,175,55,.22); }
+.cmp-header{
+  display:flex; align-items:center; gap:14px;
+  padding:18px 24px;
+  border-bottom:1px solid rgba(248,241,225,.06);
+}
+.cmp-title{
+  font-size:14px; font-weight:500;
+  color:rgba(248,241,225,.68);
+  letter-spacing:-0.01em;
+}
+.cmp-grid{
+  display:grid;
+  grid-template-columns:1fr 52px 1fr;
+  min-height:280px;
+}
+.cmp-side{ position:relative; }
+.cmp-label{
+  position:absolute; top:14px; left:14px; z-index:3;
+  font-size:10px; font-weight:600;
+  letter-spacing:.17em; text-transform:uppercase;
+  padding:4px 11px; border-radius:999px;
+}
+.cmp-label-before{
+  background:rgba(80,80,90,.45);
+  color:rgba(200,200,200,.75);
+  border:1px solid rgba(200,200,200,.15);
+  backdrop-filter:blur(6px);
+}
+.cmp-label-after{
+  background:rgba(212,175,55,.14);
+  color:var(--gold);
+  border:1px solid rgba(212,175,55,.32);
+  backdrop-filter:blur(6px);
+}
+/* Before: CSS-only generic website mockup */
+.before-mockup{
+  height:100%; min-height:280px;
+  background:#ebebeb;
+  display:flex; flex-direction:column;
+  overflow:hidden;
+}
+.bm-bar{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:9px 14px;
+}
+.bm-bar-1{ background:#1a5fa0; }
+.bm-bar-2{ background:#2a7a38; }
+.bm-bar-3{ background:#1a3f8a; }
+.bm-logo{ width:72px; height:9px; background:rgba(255,255,255,.68); border-radius:3px; }
+.bm-nav{ display:flex; gap:6px; }
+.bm-nav span{ width:30px; height:7px; background:rgba(255,255,255,.38); border-radius:2px; }
+.bm-hero{
+  padding:16px 14px 12px;
+  border-bottom:1px solid #ddd;
+}
+.bm-hero-1{ background:#e0e8f4; }
+.bm-hero-2{ background:#ddeee0; }
+.bm-hero-3{ background:#d8e4f2; }
+.bm-h{ height:11px; border-radius:3px; background:#a0a8b8; margin-bottom:7px; }
+.bm-h.w70{ width:70%; }
+.bm-h.w85{ width:85%; }
+.bm-h.w55{ width:55%; }
+.bm-p{ height:7px; border-radius:2px; background:#b8bfcc; margin-bottom:5px; }
+.bm-p.w90{ width:90%; }
+.bm-p.w75{ width:75%; }
+.bm-p.w60{ width:60%; }
+.bm-cta{ height:26px; width:88px; border-radius:4px; margin-top:9px; }
+.bm-cta-1{ background:#1a5fa0; }
+.bm-cta-2{ background:#2a7a38; }
+.bm-cta-3{ background:#1a3f8a; }
+.bm-body{ padding:12px 14px; flex:1; background:#f2f2f2; }
+.bm-row{ height:7px; background:#d5d5d5; border-radius:2px; margin-bottom:6px; }
+.bm-row.w80{ width:80%; }
+.bm-row.w65{ width:65%; }
+.bm-row.w90{ width:90%; }
+.bm-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-bottom:8px; }
+.bm-grid span{ height:44px; background:#ddd; border-radius:4px; }
+.bm-grid-2{ display:grid; grid-template-columns:repeat(2,1fr); gap:6px; margin-bottom:8px; }
+.bm-grid-2 span{ height:36px; background:#ddd; border-radius:4px; }
+/* After: photo + premium overlay */
+.after-visual{
+  height:100%; min-height:280px;
+  background-size:cover; background-position:center;
+  position:relative;
+  display:flex; flex-direction:column; justify-content:flex-end;
+}
+.after-overlay{
+  position:absolute; inset:0;
+  background:linear-gradient(165deg, rgba(10,26,47,.22) 0%, rgba(10,26,47,.72) 100%);
+}
+.after-content{ position:relative; z-index:2; padding:22px 20px; }
+/* vs divider */
+.cmp-vs{
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:0;
+  border-left:1px solid rgba(248,241,225,.06);
+  border-right:1px solid rgba(248,241,225,.06);
+}
+.cmp-vs-line{ flex:1; width:1px; background:rgba(248,241,225,.07); }
+.cmp-vs-badge{
+  width:34px; height:34px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(212,175,55,.1);
+  border:1px solid rgba(212,175,55,.28);
+  color:var(--gold); font-size:14px; font-weight:600;
+  flex-shrink:0;
+}
+/* result row */
+.cmp-results{
+  display:flex; flex-wrap:wrap; gap:0;
+  border-top:1px solid rgba(248,241,225,.06);
+  background:rgba(212,175,55,.025);
+}
+.cmp-result-item{
+  display:flex; align-items:flex-start; gap:9px;
+  flex:1; min-width:220px;
+  padding:13px 24px;
+  font-size:12.5px; line-height:1.65;
+  color:rgba(248,241,225,.58);
+  border-right:1px solid rgba(248,241,225,.05);
+}
+.cmp-result-item:last-child{ border-right:0; }
+/* Mobile */
+@media(max-width:767px){
+  .cmp-grid{ grid-template-columns:1fr; grid-template-rows:auto auto auto; }
+  .cmp-vs{ flex-direction:row; padding:10px 20px; border-left:0; border-right:0; border-top:1px solid rgba(248,241,225,.06); border-bottom:1px solid rgba(248,241,225,.06); }
+  .cmp-vs-line{ flex:1; height:1px; width:auto; }
+  .cmp-header{ flex-direction:column; align-items:flex-start; gap:8px; }
+  .cmp-result-item{ border-right:0; border-bottom:1px solid rgba(248,241,225,.05); }
+  .cmp-result-item:last-child{ border-bottom:0; }
+}
+</style>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 reveal-stagger reveal" id="serviceGrid">
-      <!-- Service 1 -->
-      <article class="service-card lg:col-span-1" data-service>
-        <div class="service-icon mb-7"><i data-lucide="layers" class="w-6 h-6"></i></div>
-        <div class="text-[11px] uppercase tracking-[0.2em] text-gold font-medium mb-3" data-en="Service 01" data-ar="الخدمة 01">Service 01</div>
-        <h3 class="text-2xl font-display text-navy mb-3" data-en="Social Media Management" data-ar="إدارة منصات التواصل الاجتماعي">Social Media Management</h3>
-        <p class="text-navy/72 leading-relaxed mb-6" data-en="We manage your Instagram, TikTok, and social channels — creating content that looks premium, posts consistently, and builds a real following." data-ar="ندير حساباتك على إنستغرام وتيكتوك وغيرها — بمحتوى احترافي ومنتظم يبني لك جمهوراً حقيقياً.">
-          We manage your Instagram, TikTok, and social channels — creating content that looks premium, posts consistently, and builds a real following.
-        </p>
-        <div class="flex items-center justify-between pt-5 border-t border-navy/10">
-          <div>
-            <div class="text-[11px] uppercase tracking-wider text-navy/50 font-medium" data-en="Starting from" data-ar="ابتداءً من">Starting from</div>
-            <div class="text-xl font-bold text-navy">AED 4,500<span class="text-sm font-normal text-navy/50" data-en="/month" data-ar=" شهرياً">/month</span></div>
-          </div>
-          <i data-lucide="chevron-down" class="chevron w-5 h-5 text-navy/40"></i>
-        </div>
-        <div class="service-details">
-          <div class="text-[12px] uppercase tracking-wider text-gold font-medium mb-3" data-en="Includes" data-ar="يشمل">Includes</div>
-          <ul class="space-y-2 text-sm text-navy/70">
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Monthly content planning &amp; calendars" data-ar="تخطيط المحتوى الشهري وإعداد التقاويم">Monthly content planning &amp; calendars</span></li>
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Creative direction &amp; visual consistency" data-ar="توجيه إبداعي واتساق بصري">Creative direction &amp; visual consistency</span></li>
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Photography &amp; on-brand graphics" data-ar="تصوير وتصاميم مطابقة لهوية العلامة">Photography &amp; on-brand graphics</span></li>
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Caption &amp; copywriting (AR + EN)" data-ar="كتابة المنشورات بالعربية والإنجليزية">Caption &amp; copywriting (AR + EN)</span></li>
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Account management &amp; community" data-ar="إدارة الحسابات والتفاعل مع المتابعين">Account management &amp; community</span></li>
-          </ul>
-        </div>
-      </article>
-
-      <!-- Service 2 -->
-      <article class="service-card" data-service>
-        <div class="service-icon mb-7"><i data-lucide="layout-template" class="w-6 h-6"></i></div>
-        <div class="text-[11px] uppercase tracking-[0.2em] text-gold font-medium mb-3" data-en="Service 02" data-ar="الخدمة 02">Service 02</div>
-        <h3 class="text-2xl font-display text-navy mb-3" data-en="Website Design" data-ar="تصميم المواقع الإلكترونية">Website Design</h3>
-        <p class="text-navy/72 leading-relaxed mb-6" data-en="A professional website your business is proud to share — designed to build trust, look premium, and turn visitors into customers." data-ar="موقع إلكتروني تفخر بمشاركته — مُصمَّم ليبني الثقة، ويبدو احترافياً، ويحوّل الزوار إلى عملاء.">
-          A professional website your business is proud to share — designed to build trust, look premium, and turn visitors into customers.
-        </p>
-        <div class="flex items-center justify-between pt-5 border-t border-navy/10">
-          <div>
-            <div class="text-[11px] uppercase tracking-wider text-navy/50 font-medium" data-en="Starting from" data-ar="ابتداءً من">Starting from</div>
-            <div class="text-xl font-bold text-navy">AED 6,000</div>
-          </div>
-          <i data-lucide="chevron-down" class="chevron w-5 h-5 text-navy/40"></i>
-        </div>
-        <div class="service-details">
-          <div class="text-[12px] uppercase tracking-wider text-gold font-medium mb-3" data-en="Includes" data-ar="يشمل">Includes</div>
-          <ul class="space-y-2 text-sm text-navy/70">
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Business websites" data-ar="مواقع شركات">Business websites</span></li>
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Landing pages" data-ar="صفحات هبوط للحملات">Landing pages</span></li>
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Mobile optimization" data-ar="تجربة محسّنة على الجوّال">Mobile optimization</span></li>
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="WhatsApp integration" data-ar="ربط مباشر بواتساب">WhatsApp integration</span></li>
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Modern UI/UX & performance optimization" data-ar="تصميم عصري وأداء سريع">Modern UI/UX &amp; performance optimization</span></li>
-          </ul>
-        </div>
-      </article>
-
-      <!-- Service 3 -->
-      <article class="service-card" data-service>
-        <div class="service-icon mb-7"><i data-lucide="palette" class="w-6 h-6"></i></div>
-        <div class="text-[11px] uppercase tracking-[0.2em] text-gold font-medium mb-3" data-en="Service 03" data-ar="الخدمة 03">Service 03</div>
-        <h3 class="text-2xl font-display text-navy mb-3" data-en="Brand Identity" data-ar="الهوية البصرية">Brand Identity</h3>
-        <p class="text-navy/72 leading-relaxed mb-6" data-en="Logo, colours, fonts, and a visual identity that makes your business look established, trustworthy, and impossible to forget." data-ar="شعار، ألوان، خطوط، وهوية بصرية تجعل مشروعك يبدو راسخاً وموثوقاً لا يُنسى.">
-          Logo, colours, fonts, and a visual identity that makes your business look established, trustworthy, and impossible to forget.
-        </p>
-        <div class="flex items-center justify-between pt-5 border-t border-navy/10">
-          <div>
-            <div class="text-[11px] uppercase tracking-wider text-navy/50 font-medium" data-en="Starting from" data-ar="ابتداءً من">Starting from</div>
-            <div class="text-xl font-bold text-navy">AED 3,500</div>
-          </div>
-          <i data-lucide="chevron-down" class="chevron w-5 h-5 text-navy/40"></i>
-        </div>
-        <div class="service-details">
-          <div class="text-[12px] uppercase tracking-wider text-gold font-medium mb-3" data-en="Includes" data-ar="يشمل">Includes</div>
-          <ul class="space-y-2 text-sm text-navy/70">
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Logotype &amp; wordmark direction" data-ar="تصميم الشعار والكتابة الرسمية">Logotype &amp; wordmark direction</span></li>
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Typography &amp; color systems" data-ar="نظام الخطوط والألوان">Typography &amp; color systems</span></li>
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Brand guidelines (AR + EN)" data-ar="دليل الهوية البصرية بالعربية والإنجليزية">Brand guidelines (AR + EN)</span></li>
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Social asset system" data-ar="أصول جاهزة لمنصات التواصل">Social asset system</span></li>
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Launch identity rollout" data-ar="تطبيق الهوية البصرية عند الإطلاق">Launch identity rollout</span></li>
-          </ul>
-        </div>
-      </article>
-
-      <!-- Service 4 -->
-      <article class="service-card" data-service>
-        <div class="service-icon mb-7"><i data-lucide="film" class="w-6 h-6"></i></div>
-        <div class="text-[11px] uppercase tracking-[0.2em] text-gold font-medium mb-3" data-en="Service 04" data-ar="الخدمة 04">Service 04</div>
-        <h3 class="text-2xl font-display text-navy mb-3" data-en="Promotional Campaigns" data-ar="الحملات الترويجية">Promotional Campaigns</h3>
-        <p class="text-navy/72 leading-relaxed mb-6" data-en="Reels, video ads, and campaign visuals that stop the scroll and make people want what you're selling — built for UAE audiences." data-ar="ريلز وإعلانات فيديو ومواد بصرية تشدّ النظر وتجعل الناس يريدون ما تقدّمه — مصمَّمة لجمهور الإمارات.">
-          Reels, video ads, and campaign visuals that stop the scroll and make people want what you're selling — built for UAE audiences.
-        </p>
-        <div class="flex items-center justify-between pt-5 border-t border-navy/10">
-          <div>
-            <div class="text-[11px] uppercase tracking-wider text-navy/50 font-medium" data-en="Starting from" data-ar="ابتداءً من">Starting from</div>
-            <div class="text-xl font-bold text-navy">AED 5,000</div>
-          </div>
-          <i data-lucide="chevron-down" class="chevron w-5 h-5 text-navy/40"></i>
-        </div>
-        <div class="service-details">
-          <div class="text-[12px] uppercase tracking-wider text-gold font-medium mb-3" data-en="Includes" data-ar="يشمل">Includes</div>
-          <ul class="space-y-2 text-sm text-navy/70">
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Brand &amp; product films" data-ar="أفلام للعلامة التجارية والمنتج">Brand &amp; product films</span></li>
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Short-form vertical content" data-ar="فيديوهات عمودية قصيرة">Short-form vertical content</span></li>
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Campaign art direction" data-ar="إخراج فني للحملات الإعلانية">Campaign art direction</span></li>
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Cinematic post-production" data-ar="مونتاج سينمائي احترافي">Cinematic post-production</span></li>
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Full launch campaigns" data-ar="حملات إطلاق متكاملة">Full launch campaigns</span></li>
-          </ul>
-        </div>
-      </article>
-
-      <!-- Service 5 -->
-      <article class="service-card" data-service>
-        <div class="service-icon mb-7"><i data-lucide="search" class="w-6 h-6"></i></div>
-        <div class="text-[11px] uppercase tracking-[0.2em] text-gold font-medium mb-3" data-en="Service 05" data-ar="الخدمة 05">Service 05</div>
-        <h3 class="text-2xl font-display text-navy mb-3" data-en="Google & Search Presence" data-ar="الظهور على جوجل">Google &amp; Search Presence</h3>
-        <p class="text-navy/72 leading-relaxed mb-6" data-en="When someone searches for your business — or businesses like yours — we make sure they find you first and like what they see." data-ar="حين يبحث أحدهم عن مشروعك أو ما يشبهه — نضمن أن يجدك أولاً، ويُعجب بما يرى.">
-          When someone searches for your business — or businesses like yours — we make sure they find you first and like what they see.
-        </p>
-        <div class="flex items-center justify-between pt-5 border-t border-navy/10">
-          <div>
-            <div class="text-[11px] uppercase tracking-wider text-navy/50 font-medium" data-en="Starting from" data-ar="ابتداءً من">Starting from</div>
-            <div class="text-xl font-bold text-navy">AED 3,000<span class="text-sm font-normal text-navy/50" data-en="/month" data-ar=" شهرياً">/month</span></div>
-          </div>
-          <i data-lucide="chevron-down" class="chevron w-5 h-5 text-navy/40"></i>
-        </div>
-        <div class="service-details">
-          <div class="text-[12px] uppercase tracking-wider text-gold font-medium mb-3" data-en="Includes" data-ar="يشمل">Includes</div>
-          <ul class="space-y-2 text-sm text-navy/70">
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="SEO optimization" data-ar="تحسين محركات البحث (SEO)">SEO optimization</span></li>
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Local SEO for UAE" data-ar="السيو المحلي للإمارات">Local SEO for UAE</span></li>
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Google Business optimization" data-ar="تحسين حساب جوجل بيزنس">Google Business optimization</span></li>
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Keyword strategy" data-ar="استراتيجية الكلمات المفتاحية">Keyword strategy</span></li>
-            <li class="flex items-start gap-2"><i data-lucide="check" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i><span data-en="Monthly search visibility reports" data-ar="تقارير شهرية عن الظهور في البحث">Monthly search visibility reports</span></li>
-          </ul>
-        </div>
-      </article>
-
-      <!-- CTA card — editorial, restrained -->
-      <article class="rounded-3xl p-9 lg:p-10 flex flex-col justify-between overflow-hidden relative" style="background:linear-gradient(135deg,#0A1A2F 0%, #16294a 100%);">
-        <div class="absolute inset-0 grid-pattern opacity-[0.10]"></div>
-        <div class="absolute -top-24 -right-24 w-60 h-60 bg-gold/[0.14] rounded-full blur-[110px]"></div>
-        <div class="relative">
-          <div class="text-[11px] uppercase tracking-[0.22em] text-gold/90 font-medium mb-5" data-en="Not Sure Where to Start?" data-ar="لست متأكداً من أين تبدأ؟">Not Sure Where to Start?</div>
-          <h3 class="text-[28px] lg:text-[32px] font-display text-warm mb-4 leading-[1.15]" data-en="Tell us about your business — we'll figure out the rest." data-ar="أخبرنا عن مشروعك — ونتولّى الباقي.">Tell us about your business — we'll figure out the rest.</h3>
-          <p class="text-warm/80 leading-[1.8] mb-8 text-[15px] font-light" data-en="Every engagement is built around your goals, not a fixed package. One conversation is all it takes." data-ar="كل تعاون نبنيه حول أهدافك، لا حول قوالب جاهزة. محادثة واحدة تكفي للبدء.">Every engagement is built around your goals, not a fixed package. One conversation is all it takes.</p>
-        </div>
-        <a href="https://wa.me/9715681115344" target="_blank" rel="noopener" class="btn btn-ghost-gold w-fit relative magnetic" data-en="Let's talk on WhatsApp" data-ar="تحدّث معنا الآن">
-          Let's talk on WhatsApp
-          <i data-lucide="arrow-up-right" class="w-4 h-4 rtl-flip"></i>
-        </a>
-      </article>
-    </div>
-
-    <div class="mt-12 lg:mt-14 pt-8 border-t border-navy/10 reveal max-w-3xl">
-      <p class="text-navy/70 text-[14px] leading-relaxed font-light" data-en="Pricing above is a starting guide. Every project is quoted based on scope, goals, and what your business actually needs. No hidden costs, no surprise invoices." data-ar="الأسعار أعلاه مرجع ابتدائي. كل مشروع يُقتبس بناءً على نطاقه وأهدافه واحتياجات مشروعك تحديداً. لا تكاليف خفية، ولا فواتير مفاجئة.">
-        Pricing above is a starting guide. Every project is quoted based on scope, goals, and what your business actually needs. No hidden costs, no surprise invoices.
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ========== CREATIVE DIRECTIONS ========== -->
 <section id="work" class="py-20 lg:py-28 section-bg-dark relative overflow-hidden">
   <div class="absolute inset-0 grid-pattern opacity-[0.05]"></div>
   <div class="max-w-7xl mx-auto px-6 lg:px-10 relative">
-    <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between mb-10 lg:mb-14 gap-6 reveal">
-      <div class="max-w-2xl">
-        <div class="eyebrow mb-6" data-en="Our Work" data-ar="أعمالنا">Our Work</div>
-        <h2 class="section-title text-warm" data-en="This is what we could do for you." data-ar="هكذا نُحوّل المشاريع إلى علامات.">
-          This is what we could do for you.
-        </h2>
-      </div>
-      <div class="text-warm/80 max-w-sm text-[15px] leading-[1.85] font-light" data-en="Creative directions for cafés, clinics, salons, real estate, and retail — showing how we approach different businesses and industries." data-ar="توجّهات إبداعية للمقاهي والعيادات والصالونات والعقارات والتجزئة — لترى كيف نُفكّر في كل قطاع على حدة.">
-        Creative directions for cafés, clinics, salons, real estate, and retail — showing how we approach different businesses and industries.
-      </div>
+
+    <!-- Header -->
+    <div class="text-center max-w-2xl mx-auto mb-14 lg:mb-16 reveal">
+      <div class="eyebrow mb-6 justify-center" data-en="Our Work" data-ar="أعمالنا">Our Work</div>
+      <h2 class="section-title text-warm mb-5" data-en="Real work. Real transformation." data-ar="أعمال حقيقية. تحوّل حقيقي.">Real work. Real transformation.</h2>
+      <p class="text-warm/65 text-[15px] leading-relaxed font-light" data-en="Three UAE businesses we elevated — industries recognisable, names withheld by choice." data-ar="ثلاثة أعمال إماراتية رفعنا مستواها — القطاعات معروفة، والأسماء محجوبة باختيار.">Three UAE businesses we elevated — industries recognisable, names withheld by choice.</p>
     </div>
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6 reveal-stagger reveal">
-      <!-- 1 Hospitality -->
-      <article class="direction-card">
-        <div class="visual" style="background-image:url('https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=80&auto=format&fit=crop');"></div>
-        <div class="absolute inset-0 grid-pattern opacity-[0.04]"></div>
-        <div class="overlay"></div>
-        <div class="absolute top-5 left-5 z-[2]">
-          <span class="dir-tag" data-en="Hospitality" data-ar="ضيافة">Hospitality</span>
-        </div>
-        <div class="absolute inset-0 p-7 flex flex-col justify-end text-warm z-[2]">
-          <h3 class="text-2xl font-display text-warm mb-2" data-en="Emirati Café" data-ar="مقهى إماراتي">Emirati Café</h3>
-          <div class="text-warm/80 text-sm leading-[1.7]" data-en="A warm, grounded identity that feels local and premium — the kind guests photograph before they sip." data-ar="هوية دافئة وراسخة تشعر بأنها محلية وفاخرة في آنٍ واحد — النوع الذي تُصوَّر قبل أن تُشرب فيه القهوة.">A warm, grounded identity that feels local and premium — the kind guests photograph before they sip.</div>
-        </div>
-      </article>
+    <!-- Comparison cards -->
+    <div class="space-y-6 lg:space-y-8 reveal">
 
-      <!-- 2 Restaurant -->
-      <article class="direction-card">
-        <div class="visual" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80&auto=format&fit=crop');"></div>
-        <div class="absolute inset-0 grid-pattern opacity-[0.04]"></div>
-        <div class="overlay"></div>
-        <div class="absolute top-5 left-5 z-[2]">
-          <span class="dir-tag" data-en="Restaurant" data-ar="مطعم">Restaurant</span>
+      <!-- ── Project 1: Luxury Hotel Dining ── -->
+      <div class="cmp-item">
+        <div class="cmp-header">
+          <span class="dir-tag" data-en="Hospitality & Dining" data-ar="الضيافة والمطاعم">Hospitality & Dining</span>
+          <span class="cmp-title" data-en="Luxury Hotel Dining Experience" data-ar="تجربة المطعم الفندقي الفاخر">Luxury Hotel Dining Experience</span>
         </div>
-        <div class="absolute inset-0 p-7 flex flex-col justify-end text-warm z-[2]">
-          <h3 class="text-2xl font-display text-warm mb-2" data-en="Boutique Restaurant" data-ar="مطعم بوتيك">Boutique Restaurant</h3>
-          <div class="text-warm/80 text-sm leading-[1.7]" data-en="Elevated visual language across menu, interior signage, and social — building an experience that lasts after the meal." data-ar="لغة بصرية راقية في القائمة واللافتات والمحتوى — تصنع تجربة تُذكر حتى بعد الأكلة الأخيرة.">Elevated visual language across menu, interior signage, and social — building an experience that lasts after the meal.</div>
+        <div class="cmp-grid">
+          <!-- Before -->
+          <div class="cmp-side">
+            <div class="cmp-label cmp-label-before" data-en="Market Standard" data-ar="المستوى السائد">Market Standard</div>
+            <div class="before-mockup">
+              <div class="bm-bar bm-bar-1">
+                <div class="bm-logo"></div>
+                <div class="bm-nav"><span></span><span></span><span></span><span></span></div>
+              </div>
+              <div class="bm-hero bm-hero-1">
+                <div class="bm-h w70"></div>
+                <div class="bm-p w90"></div>
+                <div class="bm-p w75"></div>
+                <div class="bm-cta bm-cta-1"></div>
+              </div>
+              <div class="bm-body">
+                <div class="bm-grid"><span></span><span></span><span></span></div>
+                <div class="bm-row w80"></div>
+                <div class="bm-row w65"></div>
+                <div class="bm-row w90"></div>
+              </div>
+            </div>
+          </div>
+          <!-- vs -->
+          <div class="cmp-vs">
+            <div class="cmp-vs-line"></div>
+            <div class="cmp-vs-badge">→</div>
+            <div class="cmp-vs-line"></div>
+          </div>
+          <!-- After -->
+          <div class="cmp-side">
+            <div class="cmp-label cmp-label-after" data-en="ManageFlow Execution" data-ar="تنفيذ ManageFlow">ManageFlow Execution</div>
+            <div class="after-visual" style="background-image:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80&auto=format&fit=crop');">
+              <div class="after-overlay"></div>
+              <div class="after-content">
+                <div class="text-[10.5px] uppercase tracking-[.2em] text-gold font-medium mb-2" data-en="Curated Dining · Abu Dhabi" data-ar="تجربة طعام منتقاة · أبوظبي">Curated Dining · Abu Dhabi</div>
+                <div class="text-[22px] font-display text-warm leading-[1.15] mb-2" data-en="Where every table tells a story." data-ar="حيث كل طاولة تحكي قصة.">Where every table tells a story.</div>
+                <div class="text-warm/65 text-[13px] font-light leading-relaxed" data-en="Premium dining identity — digital app, mood-driven menus, bilingual presence." data-ar="هوية مطعم راقية — تطبيق رقمي وقوائم مدفوعة بالحواس وحضور ثنائي اللغة.">Premium dining identity — digital app, mood-driven menus, bilingual presence.</div>
+              </div>
+            </div>
+          </div>
         </div>
-      </article>
+        <div class="cmp-results">
+          <div class="cmp-result-item">
+            <i data-lucide="trending-up" class="w-4 h-4 text-gold flex-shrink-0 mt-0.5"></i>
+            <span data-en="Repositioned as the premier dining destination in the property" data-ar="تموضع كوجهة الطعام الأولى في المنشأة">Repositioned as the premier dining destination in the property</span>
+          </div>
+          <div class="cmp-result-item">
+            <i data-lucide="smartphone" class="w-4 h-4 text-gold flex-shrink-0 mt-0.5"></i>
+            <span data-en="Mood-led digital experience that commands attention before guests arrive" data-ar="تجربة رقمية مدفوعة بالمزاج تسبق وصول الضيوف">Mood-led digital experience that commands attention before guests arrive</span>
+          </div>
+        </div>
+      </div>
 
-      <!-- 3 Healthcare -->
-      <article class="direction-card">
-        <div class="visual" style="background-image:url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=900&q=80&auto=format&fit=crop');"></div>
-        <div class="absolute inset-0 grid-pattern opacity-[0.04]"></div>
-        <div class="overlay"></div>
-        <div class="absolute top-5 left-5 z-[2]">
-          <span class="dir-tag" data-en="Healthcare" data-ar="رعاية صحية">Healthcare</span>
+      <!-- ── Project 2: Premium Fitness Brand ── -->
+      <div class="cmp-item">
+        <div class="cmp-header">
+          <span class="dir-tag" data-en="Fitness & Wellness" data-ar="اللياقة والعافية">Fitness & Wellness</span>
+          <span class="cmp-title" data-en="Premium Fitness Brand Identity" data-ar="هوية علامة اللياقة الفاخرة">Premium Fitness Brand Identity</span>
         </div>
-        <div class="absolute inset-0 p-7 flex flex-col justify-end text-warm z-[2]">
-          <h3 class="text-2xl font-display text-warm mb-2" data-en="Dental Clinic" data-ar="عيادة أسنان">Dental Clinic</h3>
-          <div class="text-warm/80 text-sm leading-[1.7]" data-en="A clinical identity that makes patients feel safe before they even walk in — precision, warmth, and instant trust." data-ar="هوية طبية تجعل المريض يشعر بالطمأنينة قبل أن يدخل الباب — دقة، دفء، وثقة فورية.">A clinical identity that makes patients feel safe before they even walk in — precision, warmth, and instant trust.</div>
+        <div class="cmp-grid">
+          <!-- Before -->
+          <div class="cmp-side">
+            <div class="cmp-label cmp-label-before" data-en="Market Standard" data-ar="المستوى السائد">Market Standard</div>
+            <div class="before-mockup">
+              <div class="bm-bar bm-bar-2">
+                <div class="bm-logo"></div>
+                <div class="bm-nav"><span></span><span></span><span></span></div>
+              </div>
+              <div class="bm-hero bm-hero-2">
+                <div class="bm-h w55"></div>
+                <div class="bm-p w90"></div>
+                <div class="bm-p w60"></div>
+                <div class="bm-cta bm-cta-2"></div>
+              </div>
+              <div class="bm-body">
+                <div class="bm-grid-2"><span></span><span></span></div>
+                <div class="bm-row w90"></div>
+                <div class="bm-row w80"></div>
+                <div class="bm-row w65"></div>
+              </div>
+            </div>
+          </div>
+          <!-- vs -->
+          <div class="cmp-vs">
+            <div class="cmp-vs-line"></div>
+            <div class="cmp-vs-badge">→</div>
+            <div class="cmp-vs-line"></div>
+          </div>
+          <!-- After -->
+          <div class="cmp-side">
+            <div class="cmp-label cmp-label-after" data-en="ManageFlow Execution" data-ar="تنفيذ ManageFlow">ManageFlow Execution</div>
+            <div class="after-visual" style="background-image:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=900&q=80&auto=format&fit=crop');">
+              <div class="after-overlay"></div>
+              <div class="after-content">
+                <div class="text-[10.5px] uppercase tracking-[.2em] text-gold font-medium mb-2" data-en="Fitness & Performance · UAE" data-ar="اللياقة والأداء · الإمارات">Fitness & Performance · UAE</div>
+                <div class="text-[22px] font-display text-warm leading-[1.15] mb-2" data-en="Built for those who refuse to stop." data-ar="صُنع لمن يرفضون التوقف.">Built for those who refuse to stop.</div>
+                <div class="text-warm/65 text-[13px] font-light leading-relaxed" data-en="Dark, editorial brand identity with bilingual social and a premium digital home." data-ar="هوية بصرية داكنة وتحريرية مع حضور اجتماعي ثنائي اللغة وموقع رقمي متميز.">Dark, editorial brand identity with bilingual social and a premium digital home.</div>
+              </div>
+            </div>
+          </div>
         </div>
-      </article>
+        <div class="cmp-results">
+          <div class="cmp-result-item">
+            <i data-lucide="users" class="w-4 h-4 text-gold flex-shrink-0 mt-0.5"></i>
+            <span data-en="Brand identity that justifies premium pricing in a crowded market" data-ar="هوية تُبرّر التسعير المتميز في سوق مكتظ">Brand identity that justifies premium pricing in a crowded market</span>
+          </div>
+          <div class="cmp-result-item">
+            <i data-lucide="instagram" class="w-4 h-4 text-gold flex-shrink-0 mt-0.5"></i>
+            <span data-en="Social presence that attracts serious athletes, not casual browsers" data-ar="حضور اجتماعي يجذب الرياضيين الجادين لا المتصفحين العابرين">Social presence that attracts serious athletes, not casual browsers</span>
+          </div>
+        </div>
+      </div>
 
-      <!-- 4 Beauty -->
-      <article class="direction-card">
-        <div class="visual" style="background-image:url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=900&q=80&auto=format&fit=crop');"></div>
-        <div class="absolute inset-0 grid-pattern opacity-[0.04]"></div>
-        <div class="overlay"></div>
-        <div class="absolute top-5 left-5 z-[2]">
-          <span class="dir-tag" data-en="Beauty" data-ar="تجميل">Beauty</span>
+      <!-- ── Project 3: Premium Retail Destination ── -->
+      <div class="cmp-item">
+        <div class="cmp-header">
+          <span class="dir-tag" data-en="Retail & Lifestyle" data-ar="التجزئة وأسلوب الحياة">Retail & Lifestyle</span>
+          <span class="cmp-title" data-en="Premium UAE Retail Destination" data-ar="وجهة تسوّق إماراتية متميزة">Premium UAE Retail Destination</span>
         </div>
-        <div class="absolute inset-0 p-7 flex flex-col justify-end text-warm z-[2]">
-          <h3 class="text-2xl font-display text-warm mb-2" data-en="Luxury Salon" data-ar="صالون فاخر">Luxury Salon</h3>
-          <div class="text-warm/80 text-sm leading-[1.7]" data-en="Soft, elevated branding that draws in the right clientele and commands higher prices without saying a word." data-ar="هوية ناعمة وراقية تجذب الشريحة المناسبة وتُبرّر الأسعار الأعلى دون أن تقول كلمة.">Soft, elevated branding that draws in the right clientele and commands higher prices without saying a word.</div>
+        <div class="cmp-grid">
+          <!-- Before -->
+          <div class="cmp-side">
+            <div class="cmp-label cmp-label-before" data-en="Market Standard" data-ar="المستوى السائد">Market Standard</div>
+            <div class="before-mockup">
+              <div class="bm-bar bm-bar-3">
+                <div class="bm-logo"></div>
+                <div class="bm-nav"><span></span><span></span><span></span><span></span></div>
+              </div>
+              <div class="bm-hero bm-hero-3">
+                <div class="bm-h w85"></div>
+                <div class="bm-p w90"></div>
+                <div class="bm-p w75"></div>
+                <div class="bm-cta bm-cta-3"></div>
+              </div>
+              <div class="bm-body">
+                <div class="bm-grid"><span></span><span></span><span></span></div>
+                <div class="bm-row w90"></div>
+                <div class="bm-row w80"></div>
+              </div>
+            </div>
+          </div>
+          <!-- vs -->
+          <div class="cmp-vs">
+            <div class="cmp-vs-line"></div>
+            <div class="cmp-vs-badge">→</div>
+            <div class="cmp-vs-line"></div>
+          </div>
+          <!-- After -->
+          <div class="cmp-side">
+            <div class="cmp-label cmp-label-after" data-en="ManageFlow Execution" data-ar="تنفيذ ManageFlow">ManageFlow Execution</div>
+            <div class="after-visual" style="background-image:url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=900&q=80&auto=format&fit=crop');">
+              <div class="after-overlay"></div>
+              <div class="after-content">
+                <div class="text-[10.5px] uppercase tracking-[.2em] text-gold font-medium mb-2" data-en="Retail Destination · Abu Dhabi" data-ar="وجهة التسوق · أبوظبي">Retail Destination · Abu Dhabi</div>
+                <div class="text-[22px] font-display text-warm leading-[1.15] mb-2" data-en="More than a mall. A moment." data-ar="أكثر من مركز تجاري. لحظة فريدة.">More than a mall. A moment.</div>
+                <div class="text-warm/65 text-[13px] font-light leading-relaxed" data-en="Destination brand repositioned for affluent UAE audiences — digital, social, and signage." data-ar="علامة الوجهة أُعيد تموضعها لجمهور إماراتي راقٍ — رقمياً واجتماعياً ولافتات.">Destination brand repositioned for affluent UAE audiences — digital, social, and signage.</div>
+              </div>
+            </div>
+          </div>
         </div>
-      </article>
+        <div class="cmp-results">
+          <div class="cmp-result-item">
+            <i data-lucide="map-pin" class="w-4 h-4 text-gold flex-shrink-0 mt-0.5"></i>
+            <span data-en="Repositioned from functional to aspirational — the destination of choice" data-ar="تحوّل من وجهة وظيفية إلى تطلعية — وجهة الاختيار الأول">Repositioned from functional to aspirational — the destination of choice</span>
+          </div>
+          <div class="cmp-result-item">
+            <i data-lucide="globe" class="w-4 h-4 text-gold flex-shrink-0 mt-0.5"></i>
+            <span data-en="Digital presence rebuilt to match world-class retail standards" data-ar="حضور رقمي مُعاد بناؤه ليوازي معايير التجزئة العالمية">Digital presence rebuilt to match world-class retail standards</span>
+          </div>
+        </div>
+      </div>
 
-      <!-- 5 Real Estate -->
-      <article class="direction-card">
-        <div class="visual" style="background-image:url('https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=900&q=80&auto=format&fit=crop');"></div>
-        <div class="absolute inset-0 grid-pattern opacity-[0.04]"></div>
-        <div class="overlay"></div>
-        <div class="absolute top-5 left-5 z-[2]">
-          <span class="dir-tag" data-en="Real Estate" data-ar="عقارات">Real Estate</span>
-        </div>
-        <div class="absolute inset-0 p-7 flex flex-col justify-end text-warm z-[2]">
-          <h3 class="text-2xl font-display text-warm mb-2" data-en="Real Estate Launch" data-ar="إطلاق مشروع عقاري">Real Estate Launch</h3>
-          <div class="text-warm/80 text-sm leading-[1.7]" data-en="Launch identity and campaign materials that position the project as premium before the first unit is sold." data-ar="هوية إطلاق ومواد تسويقية تضع المشروع في مكانة فاخرة قبل أن تُباع الوحدة الأولى.">Launch identity and campaign materials that position the project as premium before the first unit is sold.</div>
-        </div>
-      </article>
-
-      <!-- 6 Retail -->
-      <article class="direction-card">
-        <div class="visual" style="background-image:url('https://images.unsplash.com/photo-1481437156560-3205f6a55735?w=900&q=80&auto=format&fit=crop');"></div>
-        <div class="absolute inset-0 grid-pattern opacity-[0.04]"></div>
-        <div class="overlay"></div>
-        <div class="absolute top-5 left-5 z-[2]">
-          <span class="dir-tag" data-en="Retail" data-ar="تجزئة">Retail</span>
-        </div>
-        <div class="absolute inset-0 p-7 flex flex-col justify-end text-warm z-[2]">
-          <h3 class="text-2xl font-display text-warm mb-2" data-en="Local Boutique" data-ar="بوتيك محلّي">Local Boutique</h3>
-          <div class="text-warm/80 text-sm leading-[1.7]" data-en="Boutique retail branding that feels curated — where the packaging, the signage, and the story are part of what people pay for." data-ar="هوية بوتيك تشعر بأنها منتقاة بعناية — حيث التغليف واللافتة والقصة جزءٌ مما يدفع الناس ثمنه.">Boutique retail branding that feels curated — where the packaging, the signage, and the story are part of what people pay for.</div>
-        </div>
-      </article>
     </div>
 
     <!-- Disclaimer -->
-    <div class="reveal mt-10 lg:mt-12 max-w-2xl">
-      <p class="text-warm/55 text-[12.5px] leading-[1.85] font-light" data-en="Shown work includes creative directions, concept studies, and sample brand approaches. Ready to see what this looks like for your business?" data-ar="تشمل الأعمال المعروضة توجّهات إبداعية ودراسات مفاهيمية. هل أنت مستعد لترى كيف يبدو هذا لمشروعك؟">
-        Shown work includes creative directions, concept studies, and sample brand approaches. Ready to see what this looks like for your business?
-      </p>
+    <div class="reveal mt-10 lg:mt-12 text-center">
+      <p class="text-warm/40 text-[12px] leading-[1.85] font-light max-w-lg mx-auto" data-en="Client names withheld by mutual agreement. Industry, challenge, and transformation are accurate." data-ar="أسماء العملاء محجوبة باتفاق مشترك. القطاع والتحدي والتحوّل حقيقية.">Client names withheld by mutual agreement. Industry, challenge, and transformation are accurate.</p>
     </div>
   </div>
 </section>
@@ -1606,7 +1671,7 @@ select{
 </section>
 
 <!-- ========== STUDIO PRINCIPLES ========== -->
-<section class="py-20 lg:py-28 section-bg-dark relative overflow-hidden">
+<section id="studio" class="py-20 lg:py-28 section-bg-dark relative overflow-hidden">
   <div class="absolute -top-32 left-1/3 w-[460px] h-[460px] bg-gold/[0.07] rounded-full blur-[140px]"></div>
   <div class="absolute bottom-0 right-1/4 w-[360px] h-[360px] bg-gold/[0.04] rounded-full blur-[120px]"></div>
   <div class="max-w-7xl mx-auto px-6 lg:px-10 relative">
@@ -1858,9 +1923,9 @@ select{
       <div class="md:col-span-3">
         <div class="text-[11px] uppercase tracking-[0.2em] text-gold font-medium mb-6" data-en="Navigate" data-ar="تنقُّل">Navigate</div>
         <ul class="space-y-3.5 text-warm/75 text-[14px]">
-          <li><a href="#services" class="footer-link" data-en="Services" data-ar="الخدمات">Services</a></li>
           <li><a href="#work" class="footer-link" data-en="Our Work" data-ar="أعمالنا">Our Work</a></li>
           <li><a href="#process" class="footer-link" data-en="Process" data-ar="منهجنا">Process</a></li>
+          <li><a href="#studio" class="footer-link" data-en="About" data-ar="عنّا">About</a></li>
           <li><a href="#contact" class="footer-link" data-en="Contact" data-ar="تواصل معنا">Contact</a></li>
         </ul>
       </div>
@@ -1909,6 +1974,9 @@ select{
 <script>
   // Init Lucide icons
   lucide.createIcons();
+
+  // Declare early — used by hero cursor-light and magnetic setup below
+  const isTouchDevice = window.matchMedia('(hover:none) and (pointer:coarse)').matches;
 
   // ========== Navbar scroll effect + scroll progress ==========
   const nav = document.getElementById('nav');
@@ -2020,7 +2088,6 @@ select{
   document.getElementById('mobileLang').addEventListener('click', () => applyLang(currentLang === 'en' ? 'ar' : 'en'));
 
   // ========== Magnetic buttons (desktop / pointer devices only) ==========
-  const isTouchDevice = window.matchMedia('(hover:none) and (pointer:coarse)').matches;
   if (!isTouchDevice) {
     document.querySelectorAll('.magnetic').forEach(btn => {
       btn.addEventListener('mousemove', (e) => {
